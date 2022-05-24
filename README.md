@@ -18,7 +18,7 @@ and review the napari docs for plugin developers:
 https://napari.org/plugins/index.html
 -->
 ##Introduction
-![alt Load_data](https://raw.githubusercontent.com/zcqwh/Napari_aid/main/Tutorial/Load_data.gif?token=GHSAT0AAAAAABUYNKQCSWL4TAPLW62ZZBQSYUMNCEQ)
+![alt Load_data](https://raw.githubusercontent.com/zcqwh/napari-aideveloper/main/Tutorial/Load_data.gif)
 
 ## Installation
 
