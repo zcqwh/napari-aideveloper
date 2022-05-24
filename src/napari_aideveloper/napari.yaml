@@ -3,19 +3,10 @@ display_name: napari AIDeveloper
 contributions:
   commands: 
     - id: napari-aideveloper.make_qwidget
-      python_name: napari_aideveloper._widget:ExampleQWidget
+      python_name: napari_aideveloper._widget:AIDeveloper
       title: Make example QWidget
-    - id: napari-aideveloper.make_magic_widget
-      python_name: napari_aideveloper._widget:example_magic_widget
-      title: Make example magic widget
-    - id: napari-aideveloper.make_func_widget
-      python_name: napari_aideveloper._widget:example_function_widget
-      title: Make example function widget   
   widgets:
     - command: napari-aideveloper.make_qwidget
-      display_name: Example QWidget
-    - command: napari-aideveloper.make_magic_widget
-      display_name: Example Magic Widget
-    - command: napari-aideveloper.make_func_widget
-      autogenerate: true
-      display_name: Example Function Widget 
+      display_name: AIDeveloper
+      
+     
