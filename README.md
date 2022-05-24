@@ -7,11 +7,8 @@
 [![codecov](https://codecov.io/gh/zcqwh/napari-aideveloper/branch/main/graph/badge.svg)](https://codecov.io/gh/zcqwh/napari-aideveloper)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-aideveloper)](https://napari-hub.org/plugins/napari-aideveloper)
 
-napari_aideveloper is a napari-plugin deived from AIDeveloper that allows you to train, evaluate and apply deep neural nets for image classification within a graphical user-interface (GUI).
+napari_aideveloper is a napari-plugin deived from [AIDeveloper](https://github.com/maikherbig/AIDeveloper) that allows you to train, evaluate and apply deep neural nets for image classification within a graphical user-interface (GUI).
 
-----------------------------------
-
-This [napari] plugin was generated with [Cookiecutter] using [@napari]'s [cookiecutter-napari-plugin] template.
 
 <!--
 Don't miss the full getting started guide to set up your new package:
@@ -20,6 +17,8 @@ https://github.com/napari/cookiecutter-napari-plugin#getting-started
 and review the napari docs for plugin developers:
 https://napari.org/plugins/index.html
 -->
+##Introduction
+![alt Load_data](https://raw.githubusercontent.com/zcqwh/Napari_aid/main/Tutorial/Load_data.gif?token=GHSAT0AAAAAABUYNKQCSWL4TAPLW62ZZBQSYUMNCEQ)
 
 ## Installation
 
@@ -59,3 +58,8 @@ If you encounter any problems, please [file an issue] along with a detailed desc
 [tox]: https://tox.readthedocs.io/en/latest/
 [pip]: https://pypi.org/project/pip/
 [PyPI]: https://pypi.org/
+
+
+----------------------------------
+
+This [napari] plugin was generated with [Cookiecutter] using [@napari]'s [cookiecutter-napari-plugin] template.
