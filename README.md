@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/zcqwh/napari-aideveloper/branch/main/graph/badge.svg)](https://codecov.io/gh/zcqwh/napari-aideveloper)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-aideveloper)](https://napari-hub.org/plugins/napari-aideveloper)
 
-napari_aideveloper is a napari-plugin deived from [AIDeveloper](https://github.com/maikherbig/AIDeveloper) that allows you to train, evaluate and apply deep neural nets for image classification within a graphical user-interface (GUI).
+[napari_aideveloper](https://www.napari-hub.org/plugins/napari-aideveloper) is a napari-plugin deived from [AIDeveloper](https://github.com/maikherbig/AIDeveloper) that allows you to train, evaluate and apply deep neural nets for image classification within a graphical user-interface (GUI).
 
 
 <!--
@@ -31,8 +31,7 @@ You can install `napari-aideveloper` via [pip]:
 
 ## Contributing
 
-Contributions are very welcome. Tests can be run with [tox], please ensure
-the coverage at least stays the same before you submit a pull request.
+Contributions are very welcome. You can submit your pull request on [GitHub](https://github.com/zcqwh/napari-aideveloper/pulls). Tests can be run with [tox], please ensure the coverage at least stays the same before you submit a pull request.
 
 ## License
 
@@ -41,7 +40,7 @@ Distributed under the terms of the [BSD-3] license,
 
 ## Issues
 
-If you encounter any problems, please [file an issue] along with a detailed description.
+If you encounter any problems, please [file an issue](https://github.com/zcqwh/napari-aideveloper/issues) along with a detailed description.
 
 [napari]: https://github.com/napari/napari
 [Cookiecutter]: https://github.com/audreyr/cookiecutter
