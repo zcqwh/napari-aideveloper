@@ -17,7 +17,7 @@ https://github.com/napari/cookiecutter-napari-plugin#getting-started
 and review the napari docs for plugin developers:
 https://napari.org/plugins/index.html
 -->
-##Introduction
+## Introduction
 ![alt Load_data](https://raw.githubusercontent.com/zcqwh/napari-aideveloper/main/Tutorial/Load_data.gif)
 
 ## Installation
