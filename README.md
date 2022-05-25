@@ -18,7 +18,19 @@ and review the napari docs for plugin developers:
 https://napari.org/plugins/index.html
 -->
 ## Introduction
-![alt Load_data](https://raw.githubusercontent.com/zcqwh/napari-aideveloper/main/Tutorial/Load_data.gif)
+#### Load data
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/00_Load_data.gif?raw=true)
+
+#### Choose Neural Networks
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/01_choose%20NN.gif?raw=true)
+
+#### Set model storage path
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/02_save_model.gif?raw=true)
+
+#### Start fitting
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/03_start_fitting.gif?raw=true)
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/04_fitting.gif?raw=true)
+
 
 ## Installation
 
