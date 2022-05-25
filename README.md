@@ -18,16 +18,17 @@ and review the napari docs for plugin developers:
 https://napari.org/plugins/index.html
 -->
 ## Introduction
-#### Load data
+#### 1. Load data
+Drag and drop your data in .rtdc (HDF5) format into the file table and set the class and training/validation.
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/00_Load_data.gif?raw=true)
 
-#### Choose Neural Networks
+#### 2. Choose Neural Networks
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/01_choose%20NN.gif?raw=true)
 
-#### Set model storage path
+#### 3. Set model storage path
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/02_save_model.gif?raw=true)
 
-#### Start fitting
+#### 4. Start fitting
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/03_start_fitting.gif?raw=true)
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/04_fitting.gif?raw=true)
 
