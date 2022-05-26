@@ -22,9 +22,6 @@ import numpy as np
 import pandas as pd
 import pyqtgraph as pg
 import tensorflow as tf
-#from PyQt5 import QtCore, QtGui, QtWidgets
-#from PySide2 import QtCore, QtGui
-#from PySide2 import QtCore
 from qtpy import QtWidgets, QtGui, QtCore
 from qtpy.QtWidgets import QWidget
 from tensorflow.keras import backend as K
