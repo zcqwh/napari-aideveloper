@@ -40,8 +40,10 @@ Drag and drop your data in .rtdc (HDF5) format into the file table and set the c
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/04_fitting.gif?raw=true)
 
 #### Preview image
-#### Image augmentation
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/05_preview.gif?raw=true)
 
+#### Image augmentation
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/06_augmentation.gif?raw=true)
 
 
 
