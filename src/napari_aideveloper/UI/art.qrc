@@ -1,0 +1,43 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>icon/delete.png</file>
+    <file>icon/gauss.png</file>
+    <file>icon/add.png</file>
+    <file>icon/average_blur.png</file>
+    <file>icon/brightness_add.png</file>
+    <file>icon/brightness_mul.png</file>
+    <file>icon/color.png</file>
+    <file>icon/continue.png</file>
+    <file>icon/contrast.png</file>
+    <file>icon/CPU.png</file>
+    <file>icon/crop.png</file>
+    <file>icon/flip_h.png</file>
+    <file>icon/flip_v.png</file>
+    <file>icon/gaussian_noise_mean.png</file>
+    <file>icon/gaussian_noise_scale.png</file>
+    <file>icon/Hue.png</file>
+    <file>icon/icon.qrc</file>
+    <file>icon/load.png</file>
+    <file>icon/model_path.png</file>
+    <file>icon/motion.png</file>
+    <file>icon/multi.png</file>
+    <file>icon/new.png</file>
+    <file>icon/normalization.png</file>
+    <file>icon/nr_epochs.png</file>
+    <file>icon/padding_2.png</file>
+    <file>icon/padding.png</file>
+    <file>icon/pause.png</file>
+    <file>icon/pause.svg</file>
+    <file>icon/play.png</file>
+    <file>icon/restart.png</file>
+    <file>icon/rotate.png</file>
+    <file>icon/saturation.png</file>
+    <file>icon/save_epoch.png</file>
+    <file>icon/shear.png</file>
+    <file>icon/shift_h.png</file>
+    <file>icon/shift_w.png</file>
+    <file>icon/stop.png</file>
+    <file>icon/thumb.png</file>
+    <file>icon/zoom.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,2947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>509</width>
+    <height>714</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1200</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_9">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget_2">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1000</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="BrightText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="BrightText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="BrightText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="usesScrollButtons">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="tab_build">
+      <attribute name="title">
+       <string>Build</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>477</width>
+            <height>933</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="0" column="0">
+            <widget class="QSplitter" name="splitter_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="childrenCollapsible">
+              <bool>false</bool>
+             </property>
+             <widget class="QGroupBox" name="groupBox_files">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Drag and drop data (.rtdc) here</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <property name="leftMargin">
+                <number>6</number>
+               </property>
+               <property name="topMargin">
+                <number>6</number>
+               </property>
+               <property name="rightMargin">
+                <number>6</number>
+               </property>
+               <property name="bottomMargin">
+                <number>6</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="MyTable" name="table_dragdrop">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Valid .rtdc files have to contain at least 'images', 'pos_x' and 'pos_y'. &lt;br/&gt;After dropping data, you can specify the ‘Class’ of the images and if it should be used for training (T) or validation (V).&lt;br/&gt;Double-click on the filename to show a random image of the data set. The original and cropped (using 'Input image size') image is shown.&lt;br/&gt;Click on the button 'Plot' to open a popup where you can get a histogram or scatterplot of enclosed data.&lt;br/&gt;'Cells/Epoch' defines the nr. of images that are used in each epoch for training. Random images are drawn in each epoch during training. For the validation set, images are drawn once at the beginning and kept constant.&lt;br/&gt;Deactivate 'Shuffle' if you don't want to use random data. Then all images of this file are used.&lt;br/&gt;Zoom allows you to increase or decrease resolution. Zoom=1 does nothing; Zoom=2 zooms in; Zoom=0.5 zooms out. This is useful if you have data acquired at 40x but you want to use it to train a model for 20x data. Use 'Options'-&amp;gt;'Zooming order' to define the method used for zooming.&lt;br/&gt;Hint for RT-DC users: Use ShapeOut to gate for particular subpopulations and save the filtered data as .rtdc. Make sure to export at least 'images', 'pos_x' and 'pos_y'.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <attribute name="horizontalHeaderVisible">
+                  <bool>true</bool>
+                 </attribute>
+                 <attribute name="horizontalHeaderCascadingSectionResizes">
+                  <bool>false</bool>
+                 </attribute>
+                 <attribute name="horizontalHeaderDefaultSectionSize">
+                  <number>38</number>
+                 </attribute>
+                 <attribute name="horizontalHeaderMinimumSectionSize">
+                  <number>20</number>
+                 </attribute>
+                 <column>
+                  <property name="text">
+                   <string>Del</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>File</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Class</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>T</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>V</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Show</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Events</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Ev./Ep.</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>PIX</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Shuffle</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Zoom</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>Xtra_In</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_data_overview">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Data Overview</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_7">
+               <property name="leftMargin">
+                <number>6</number>
+               </property>
+               <property name="topMargin">
+                <number>6</number>
+               </property>
+               <property name="rightMargin">
+                <number>6</number>
+               </property>
+               <property name="bottomMargin">
+                <number>6</number>
+               </property>
+               <item row="0" column="0">
+                <widget class="QTableWidget" name="tableWidget_Info">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specify validation data via 'Build'-tab or load .rtdc file (-&amp;gt;From .rtdc).&lt;br/&gt;Use column 'Name' to specify proper cell names (for presentation purposes).&lt;br/&gt;Use column 'Clr' to specify the plotting color of that class.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QTabWidget" name="tabWidget">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="tab_define">
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </inactive>
+                 <disabled>
+                  <colorrole role="BrightText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </disabled>
+                </palette>
+               </property>
+               <attribute name="title">
+                <string>Define model</string>
+               </attribute>
+               <layout class="QGridLayout" name="gridLayout_2">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="4" column="0">
+                 <widget class="QScrollArea" name="scrollArea_2">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>445</width>
+                     <height>520</height>
+                    </rect>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_5">
+                    <item row="2" column="0">
+                     <widget class="QPushButton" name="pushButton_modelname">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>113</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>Define path and filename for the model you want to fit</string>
+                      </property>
+                      <property name="text">
+                       <string>Model path</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="art.qrc">
+                        <normaloff>:/icon/icon/model_path.png</normaloff>:/icon/icon/model_path.png</iconset>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0" colspan="3">
+                     <layout class="QHBoxLayout" name="horizontalLayout">
+                      <item>
+                       <layout class="QVBoxLayout" name="verticalLayout">
+                        <item>
+                         <widget class="QRadioButton" name="radioButton_NewModel">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>0</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>75</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>Select a model architecture in the dropdown menu</string>
+                          </property>
+                          <property name="text">
+                           <string>New</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="art.qrc">
+                            <normaloff>:/icon/icon/new.png</normaloff>:/icon/icon/new.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>20</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                          <property name="checked">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QRadioButton" name="radioButton_LoadRestartModel">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>160</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>Load an existing model and only use the architecture and restart fitting</string>
+                          </property>
+                          <property name="text">
+                           <string>Load and restart</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="art.qrc">
+                            <normaloff>:/icon/icon/restart.png</normaloff>:/icon/icon/restart.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>20</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QRadioButton" name="radioButton_LoadContinueModel">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>160</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>Load an existing model (FULL.h5) and continue fitting</string>
+                          </property>
+                          <property name="text">
+                           <string>Load and continue</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="art.qrc">
+                            <normaloff>:/icon/icon/load.png</normaloff>:/icon/icon/load.png</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>20</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <layout class="QVBoxLayout" name="verticalLayout_2">
+                        <item>
+                         <widget class="QComboBox" name="comboBox_ModelSelection">
+                          <property name="toolTip">
+                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the model architecture. MLP means Multilayer perceptron. Currently only MLPs are fast enough for AI based sorting. The definition of the architectures can be found in the model_zoo.py. If you want to implement custom Neural net architectures, you can edit model_zoo.py accordingly. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QComboBox {combobox-popup: 0;}</string>
+                          </property>
+                          <property name="maxVisibleItems">
+                           <number>20</number>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="lineEdit_LoadModelPath">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>48</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When you use 'Load and restart' or 'Load and continue', the filename of the chosen model will apprear here.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="3" column="0" colspan="3">
+                     <widget class="QGroupBox" name="groupBox_image_processing">
+                      <property name="focusPolicy">
+                       <enum>Qt::ClickFocus</enum>
+                      </property>
+                      <property name="title">
+                       <string>Image processing</string>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout">
+                       <item row="1" column="1">
+                        <widget class="QLabel" name="label_normalization">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>103</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Image normalization method. Default is 'Div. by 255'. Other normalization methods may not be supported by the Sorting Software</string>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>Normalization</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0">
+                        <widget class="QLabel" name="label_icon_normlization">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Image normalization method. Default is 'Div. by 255'. Other normalization methods may not be supported by the Sorting Software</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="art.qrc">:/icon/icon/normalization.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="MySpinBox" name="spinBox_imagecrop">
+                         <property name="maximumSize">
+                          <size>
+                           <width>300</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="focusPolicy">
+                          <enum>Qt::WheelFocus</enum>
+                         </property>
+                         <property name="value">
+                          <number>32</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_icon_crop">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Models need a defined input size image. Choose wisely since large cells should not be cut.</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="art.qrc">:/icon/icon/crop.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QLabel" name="label_crop">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>103</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Models need a defined input size image. Choose wisely since large cells should not be cut.</string>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>Input image crop</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QComboBox" name="comboBox_Normalization">
+                         <property name="maximumSize">
+                          <size>
+                           <width>300</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="sizeAdjustPolicy">
+                          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>None</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>Div.by 255</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>StdScaling using mean and std of all training data</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>StdScaling using mean and std of each image individually</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="2" column="0">
+                        <widget class="QLabel" name="label_icon_padding">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>By default, the padding mode is &quot;constant&quot;, which means that zeros are padded.
+&quot;edge&quot;: Pads with the edge values of array.
+&quot;linear_ramp&quot;: Pads with the linear ramp between end_value and the array edge value.
+&quot;maximum&quot;: Pads with the maximum value of all or part of the vector along each axis.
+&quot;mean&quot;: Pads with the mean value of all or part of the vector along each axis.
+&quot;median&quot;: Pads with the median value of all or part of the vector along each axis.
+&quot;minimum&quot;: Pads with the minimum value of all or part of the vector along each axis.
+&quot;reflect&quot;: Pads with the reflection of the vector mirrored on the first and last values of the vector along each axis.
+&quot;symmetric&quot;: Pads with the reflection of the vector mirrored along the edge of the array.
+&quot;wrap&quot;: Pads with the wrap of the vector along the axis. The first values are used to pad the end and the end values are used to pad the beginning.
+Text copied from https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="art.qrc">:/icon/icon/padding.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="2">
+                        <widget class="QComboBox" name="comboBox_zoomOrder">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>300</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="sizeAdjustPolicy">
+                          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>nearest neighbor (cv2.INTER_NEAREST)</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>lin. interp. (cv2.INTER_LINEAR)</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>quadr. interp. (cv2.INTER_AREA)</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>cubic interp. (cv2.INTER_CUBIC)</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>Lanczos 4 (cv2.INTER_LANCZOS4)</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="4" column="1">
+                        <widget class="QLabel" name="label_zoom">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>103</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Define which zoom order should be used. A zoom order of 0 would mean nearest neighbor interploation. Zooming is applied when data is loaded into AID. Zooming is only applied of the Zoom factor given in the table above is not =1.</string>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>Zoom order</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1">
+                        <widget class="QLabel" name="label_color">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>103</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>The Color Mode defines the input image depth. Color images have three channels -RGB. Grayscale images only have a single channel. Models are automatically built accordingly. Models trained for Grayscale cannot be applied to RGB images (unless images are converted). Same is true the other way around.</string>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>Color mode</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="4" column="0">
+                        <widget class="QLabel" name="label_icon_zoom">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define which zoom order should be used. A zoom order of 0 would mean nearest neighbor interploation. Zooming is applied when data is loaded into AID. Zooming is only applied of the Zoom factor given in the table above is not =1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="art.qrc">:/icon/icon/zoom.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="0">
+                        <widget class="QLabel" name="label_icon_color">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>21</width>
+                           <height>21</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>The Color Mode defines the input image depth. Color images have three channels -RGB. Grayscale images only have a single channel. Models are automatically built accordingly. Models trained for Grayscale cannot be applied to RGB images (unless images are converted). Same is true the other way around.</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="art.qrc">:/icon/icon/color.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <widget class="QComboBox" name="comboBox_GrayOrRGB">
+                         <property name="maximumSize">
+                          <size>
+                           <width>300</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="sizeAdjustPolicy">
+                          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>Grayscale</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>RGB</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="2" column="2">
+                        <widget class="QComboBox" name="comboBox_paddingMode">
+                         <property name="maximumSize">
+                          <size>
+                           <width>300</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="sizeAdjustPolicy">
+                          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>constant</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>edge</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>reflect</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>symmetric</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>wrap</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>delete</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>alternate</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="2" column="1">
+                        <widget class="QLabel" name="label_padding">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>103</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>By default, the padding mode is &quot;constant&quot;, which means that zeros are padded.
+&quot;edge&quot;: Pads with the edge values of array.
+&quot;linear_ramp&quot;: Pads with the linear ramp between end_value and the array edge value.
+&quot;maximum&quot;: Pads with the maximum value of all or part of the vector along each axis.
+&quot;mean&quot;: Pads with the mean value of all or part of the vector along each axis.
+&quot;median&quot;: Pads with the median value of all or part of the vector along each axis.
+&quot;minimum&quot;: Pads with the minimum value of all or part of the vector along each axis.
+&quot;reflect&quot;: Pads with the reflection of the vector mirrored on the first and last values of the vector along each axis.
+&quot;symmetric&quot;: Pads with the reflection of the vector mirrored along the edge of the array.
+&quot;wrap&quot;: Pads with the wrap of the vector along the axis. The first values are used to pad the end and the end values are used to pad the beginning.
+Text copied from https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html</string>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="text">
+                          <string>Padding mode</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item row="4" column="0" colspan="3">
+                     <widget class="QGroupBox" name="groupBox_training">
+                      <property name="title">
+                       <string>Training</string>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_6">
+                       <item row="0" column="0" colspan="2">
+                        <widget class="QSplitter" name="splitter_7">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <widget class="QLabel" name="label_icon_epochs">
+                          <property name="minimumSize">
+                           <size>
+                            <width>20</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>20</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>Models need a defined input size image. Choose wisely since large cells should not be cut.</string>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="pixmap">
+                           <pixmap resource="art.qrc">:/icon/icon/nr_epochs.png</pixmap>
+                          </property>
+                          <property name="scaledContents">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                         <widget class="QLabel" name="label_nr_epochs">
+                          <property name="maximumSize">
+                           <size>
+                            <width>75</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>Models need a defined input size image. Choose wisely since large cells should not be cut.</string>
+                          </property>
+                          <property name="text">
+                           <string>Nr.epochs</string>
+                          </property>
+                         </widget>
+                         <widget class="MySpinBox" name="spinBox_NrEpochs">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>24</height>
+                           </size>
+                          </property>
+                          <property name="maximum">
+                           <number>9999</number>
+                          </property>
+                          <property name="value">
+                           <number>2500</number>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item row="1" column="0" colspan="2">
+                        <widget class="Line" name="line_2">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="0">
+                        <widget class="QRadioButton" name="radioButton_cpu">
+                         <property name="maximumSize">
+                          <size>
+                           <width>50</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Train model on CPU.</string>
+                         </property>
+                         <property name="text">
+                          <string>CPU</string>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="checked">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="1">
+                        <widget class="QComboBox" name="comboBox_cpu">
+                         <property name="toolTip">
+                          <string/>
+                         </property>
+                         <property name="sizeAdjustPolicy">
+                          <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>Default CPU</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="3" column="0">
+                        <widget class="QRadioButton" name="radioButton_gpu">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>50</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="toolTip">
+                          <string>Train model on GPU.</string>
+                         </property>
+                         <property name="text">
+                          <string>GPU</string>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>20</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="1">
+                        <widget class="QComboBox" name="comboBox_gpu">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="toolTip">
+                          <string>Select the device your model should be trained on. 'Multi-GPU' will train the model on multiple GPUs in parallel.</string>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>None</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                       <item row="4" column="0" colspan="2">
+                        <widget class="QSplitter" name="splitter_6">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <widget class="QLabel" name="label_memory">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>60</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                          <property name="toolTip">
+                           <string>Limit the amount of memory used. 1.0 means 100%; 0.5 means 50%; Typically, 0.7 is a good value for a system with one GPU.</string>
+                          </property>
+                          <property name="text">
+                           <string>Memory</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignCenter</set>
+                          </property>
+                         </widget>
+                         <widget class="MyDoubleSpinBox" name="doubleSpinBox_memory">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>24</height>
+                           </size>
+                          </property>
+                          <property name="maximum">
+                           <double>1.000000000000000</double>
+                          </property>
+                          <property name="singleStep">
+                           <double>0.010000000000000</double>
+                          </property>
+                          <property name="value">
+                           <double>0.700000000000000</double>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLineEdit" name="lineEdit_modelname">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>Define path and filename for the model you want to fit.</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="tab_brightn">
+               <attribute name="title">
+                <string>Augmentation</string>
+               </attribute>
+               <layout class="QGridLayout" name="gridLayout_17">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QGroupBox" name="groupBox_example">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>200</height>
+                   </size>
+                  </property>
+                  <property name="title">
+                   <string>Example images</string>
+                  </property>
+                  <property name="flat">
+                   <bool>false</bool>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_4">
+                   <item row="0" column="0">
+                    <widget class="QComboBox" name="comboBox_example_train">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QComboBox {combobox-popup: 0;}
+QComboBox:drop-down {width:20px; }</string>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                     </property>
+                     <property name="minimumContentsLength">
+                      <number>6</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Training</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Validation</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QComboBox" name="comboBox_example_aug">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QComboBox {combobox-popup: 0;}
+QComboBox:drop-down {width:20px;}</string>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                     </property>
+                     <property name="minimumContentsLength">
+                      <number>6</number>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Original</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Augm.</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QLabel" name="label_class">
+                     <property name="text">
+                      <string>Class</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <widget class="QComboBox" name="comboBox_ShowIndex">
+                     <property name="maximumSize">
+                      <size>
+                       <width>70</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QComboBox {combobox-popup: 0;}
+QComboBox:drop-down {width:20px; }                             
+                                    
+                                    </string>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>0</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>1</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>2</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>3</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>4</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>5</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>6</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>7</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>8</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>9</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="0" column="4">
+                    <widget class="QPushButton" name="btn_show">
+                     <property name="text">
+                      <string>Show</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QGroupBox" name="groupBox_options">
+                  <property name="title">
+                   <string>Options</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_11">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>12</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item row="0" column="0">
+                    <widget class="QScrollArea" name="scrollArea_4">
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAsNeeded</enum>
+                     </property>
+                     <property name="horizontalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAsNeeded</enum>
+                     </property>
+                     <property name="widgetResizable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents_4">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>439</width>
+                        <height>802</height>
+                       </rect>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_18">
+                       <property name="topMargin">
+                        <number>6</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>6</number>
+                       </property>
+                       <item row="0" column="0">
+                        <widget class="QLabel" name="label_brightn_refresh">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Brightness augmentation is really fast, so best you refresh images for each epoch (set to 1)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="text">
+                          <string>Refresh after nr.epochs</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QSpinBox" name="spinBox_RefreshAfterEpochs">
+                         <property name="focusPolicy">
+                          <enum>Qt::WheelFocus</enum>
+                         </property>
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Brightness augmentation is really fast, so best you refresh images for each epoch (set to 1)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="value">
+                          <number>2</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="0" colspan="2">
+                        <widget class="QGroupBox" name="groupBox_aug_option_2">
+                         <property name="title">
+                          <string>Augmentation options</string>
+                         </property>
+                         <layout class="QGridLayout" name="gridLayout_12">
+                          <item row="0" column="0">
+                           <widget class="QCheckBox" name="checkBox_HorizFlip">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Should training images be flipped by horiz. axis (bottom up; top down)?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Horiz.flip</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/flip_h.png</normaloff>:/icon/icon/flip_h.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="5" column="0">
+                           <widget class="QCheckBox" name="checkBox_shear_2">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shear Intensity (Shear angle in counter-clockwise direction in degrees)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Shear</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/shear.png</normaloff>:/icon/icon/shear.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QCheckBox" name="checkBox_rotation">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Degree range for random rotations&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Rotation</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/rotate.png</normaloff>:/icon/icon/rotate.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="3" column="0">
+                           <widget class="QCheckBox" name="checkBox_height_shift">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define random shift of height&lt;br&gt;Fraction of total height if &amp;lt; 1. Otherwise pixels if&gt;=1.&lt;br&gt;Value defines an interval (-height_shift_range, +height_shift_range) from which random numbers are created   &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Height shift</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/shift_h.png</normaloff>:/icon/icon/shift_h.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="1">
+                           <widget class="QCheckBox" name="checkBox_VertFlip">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Should training images be flipped by vert. axis (left becomes right; right becomes left)?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</string>
+                            </property>
+                            <property name="text">
+                             <string>Vert.flip</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/flip_v.png</normaloff>:/icon/icon/flip_v.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="0">
+                           <widget class="QCheckBox" name="checkBox_width_shift_2">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define random shift of width&lt;br&gt;Fraction of total width, if &amp;lt; 1. Otherwise pixels if&gt;=1.&lt;br&gt;Value defines an interval (-width_shift_range, +width_shift_range) from which random numbers are created&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Width shift</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/shift_w.png</normaloff>:/icon/icon/shift_w.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="0">
+                           <widget class="QCheckBox" name="checkBox_zoom">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Range for random zoom&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Zoom</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/zoom.png</normaloff>:/icon/icon/zoom.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="1">
+                           <widget class="QLineEdit" name="lineEdit_Rotation">
+                            <property name="text">
+                             <string>3</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="1">
+                           <widget class="QLineEdit" name="lineEdit_widthShift">
+                            <property name="text">
+                             <string>0.001</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="3" column="1">
+                           <widget class="QLineEdit" name="lineEdit_heightShift">
+                            <property name="text">
+                             <string>0.001</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="1">
+                           <widget class="QLineEdit" name="lineEdit_zoomRange">
+                            <property name="text">
+                             <string>0.001</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="5" column="1">
+                           <widget class="QLineEdit" name="lineEdit_shearRange">
+                            <property name="text">
+                             <string>0.001</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="2" column="0" colspan="2">
+                        <widget class="QGroupBox" name="groupBox_brightness">
+                         <property name="toolTip">
+                          <string>&quot;&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define add/multiply offset to make image randomly slightly brighter or darker. Additive offset (A) is one number that is added to all pixels values; Multipl. offset (M) is a value to multiply each pixel value with: NewImage = A + M*Image&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</string>
+                         </property>
+                         <property name="title">
+                          <string>Brightness</string>
+                         </property>
+                         <layout class="QGridLayout" name="gridLayout_13">
+                          <item row="0" column="0">
+                           <widget class="QCheckBox" name="checkBox_add">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define lower threshold for additive offset&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Add.</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/add.png</normaloff>:/icon/icon/add.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="1">
+                           <widget class="QSpinBox" name="spinBox_PlusLower">
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define lower threshold for additive offset&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="minimum">
+                             <number>-255</number>
+                            </property>
+                            <property name="maximum">
+                             <number>255</number>
+                            </property>
+                            <property name="value">
+                             <number>-15</number>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="2">
+                           <widget class="QSpinBox" name="spinBox_PlusUpper">
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define upper threshold for additive offset&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="minimum">
+                             <number>-255</number>
+                            </property>
+                            <property name="maximum">
+                             <number>255</number>
+                            </property>
+                            <property name="value">
+                             <number>15</number>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QCheckBox" name="checkBox_mult">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define lower threshold for multiplicative offset&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Mult.</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/multi.png</normaloff>:/icon/icon/multi.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="1">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_MultLower">
+                            <property name="value">
+                             <double>0.700000000000000</double>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="2">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_MultUpper">
+                            <property name="value">
+                             <double>1.300000000000000</double>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="3" column="0" colspan="2">
+                        <widget class="QGroupBox" name="groupBox_gaussian">
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define Gaussian Noise, which is added to the image&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="title">
+                          <string>Gaussian noise</string>
+                         </property>
+                         <layout class="QGridLayout" name="gridLayout_14">
+                          <item row="0" column="0">
+                           <widget class="QCheckBox" name="checkBox_gauss_mean">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define the mean of the Gaussian noise. Typically this should be zero. If you use a positive number it would mean that your noise tends to be positive, and adding this to the image results in a more noisy and brighter image&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Mean</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/gaussian_noise_mean.png</normaloff>:/icon/icon/gaussian_noise_mean.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="1">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_GaussianNoiseMean">
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define the mean of the Gaussian noise. Typically this should be zero. If you use a positive number it would mean that your noise tends to be positive, and adding this to the image results in a more noisy and brighter image&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QCheckBox" name="checkBox_gauss_scale">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define the standard deviation of the Gaussian noise. A larger number means a wider distribution of the noise, which results in an image that looks more noisy. Prefer to change this parameter over chainging the mean.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="text">
+                             <string>Scale</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/gaussian_noise_scale.png</normaloff>:/icon/icon/gaussian_noise_scale.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="1">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_GaussianNoiseScale">
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Define the standard deviation of the Gaussian noise. A larger number means a wider distribution of the noise, which results in an image that looks more noisy. Prefer to change this parameter over chainging the mean.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="value">
+                             <double>3.000000000000000</double>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="4" column="0" colspan="2">
+                        <widget class="QGroupBox" name="groupBox_color">
+                         <property name="title">
+                          <string>Color</string>
+                         </property>
+                         <layout class="QGridLayout" name="gridLayout_15">
+                          <item row="0" column="0">
+                           <widget class="QCheckBox" name="checkBox_contrast">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>Augment contrast using a random factor. Applicable for Grayscale and RGB. Left spinbox (lower factor) has to be &gt;0. '0.70' to '1.3' means plus/minus 30% contrast (at random)</string>
+                            </property>
+                            <property name="text">
+                             <string>Contrast</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/contrast.png</normaloff>:/icon/icon/contrast.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="1">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_contrastLower">
+                            <property name="singleStep">
+                             <double>0.100000000000000</double>
+                            </property>
+                            <property name="value">
+                             <double>0.700000000000000</double>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="2">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_contrastHigher">
+                            <property name="maximum">
+                             <double>100.000000000000000</double>
+                            </property>
+                            <property name="singleStep">
+                             <double>0.100000000000000</double>
+                            </property>
+                            <property name="value">
+                             <double>1.300000000000000</double>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QCheckBox" name="checkBox_saturation">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>Augment saturation using a random factor. Applicable for RGB only. Left spinbox (lower factor) has to be &gt;0. '0.70' to '1.3' means plus/minus 30% saturation (at random)</string>
+                            </property>
+                            <property name="text">
+                             <string>Saturation</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/saturation.png</normaloff>:/icon/icon/saturation.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="1">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_saturationLower"/>
+                          </item>
+                          <item row="1" column="2">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_saturationHigher"/>
+                          </item>
+                          <item row="2" column="0">
+                           <widget class="QCheckBox" name="checkBox_hue">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>Augment hue using a random factor. Applicable for RGB only. Left spinbox (lower factor) has to be &gt;0. '0.70' to '1.3' means plus/minus 30% hue (at random)</string>
+                            </property>
+                            <property name="text">
+                             <string>Hue</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/Hue.png</normaloff>:/icon/icon/Hue.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="1">
+                           <widget class="QDoubleSpinBox" name="doubleSpinBox_hueDelta"/>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="5" column="0" colspan="2">
+                        <widget class="QGroupBox" name="groupBox_blurring">
+                         <property name="title">
+                          <string>Blurring</string>
+                         </property>
+                         <layout class="QGridLayout" name="gridLayout_16">
+                          <item row="0" column="1">
+                           <widget class="QLabel" name="label_min">
+                            <property name="text">
+                             <string>Min</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="2">
+                           <widget class="QLabel" name="label_max">
+                            <property name="text">
+                             <string>Max</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QCheckBox" name="checkBox_avgBlur">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>Apply random average blurring. Define a range of kernel sizes for the average blur (min. and max. kernel size). Values from this range are then randomly picked for each image. To blur an image, all pixels within the kernel area used to compute an average pixel value. The central element of the kernel area in the image is then set to this value. This operation is carried out over the entire image.</string>
+                            </property>
+                            <property name="text">
+                             <string>Average</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/average_blur.png</normaloff>:/icon/icon/average_blur.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="1">
+                           <widget class="QSpinBox" name="spinBox_avgBlurMin">
+                            <property name="toolTip">
+                             <string>Define the minimum kernel size for average blur</string>
+                            </property>
+                            <property name="maximum">
+                             <number>1000</number>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="2">
+                           <widget class="QSpinBox" name="spinBox_avgBlurMax">
+                            <property name="toolTip">
+                             <string>Define the maximum kernel size for average blur</string>
+                            </property>
+                            <property name="maximum">
+                             <number>1000</number>
+                            </property>
+                            <property name="value">
+                             <number>5</number>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="0">
+                           <widget class="QCheckBox" name="checkBox_gaussBlur">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>Apply random gaussian blurring. For gaussian blurring, a gaussian kernel of defined size is used. Please define a min. and max. kernel size. For each image a random value is picked from this range to generate a gaussian kernel.</string>
+                            </property>
+                            <property name="text">
+                             <string>Gauss</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/gauss.png</normaloff>:/icon/icon/gauss.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="1">
+                           <widget class="QSpinBox" name="spinBox_gaussBlurMin">
+                            <property name="toolTip">
+                             <string>Define the minimum kernel size for gaussian blur</string>
+                            </property>
+                            <property name="maximum">
+                             <number>1000</number>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="2">
+                           <widget class="QSpinBox" name="spinBox_gaussBlurMax">
+                            <property name="toolTip">
+                             <string>Define the maximum kernel size for gaussian blur</string>
+                            </property>
+                            <property name="maximum">
+                             <number>1000</number>
+                            </property>
+                            <property name="value">
+                             <number>5</number>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="3" column="1">
+                           <widget class="QLabel" name="label_kernel">
+                            <property name="toolTip">
+                             <string>Define kernels by giving a range [min,max]. Values in this range are then randomly picked for each image</string>
+                            </property>
+                            <property name="text">
+                             <string>Kernel</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="3" column="2">
+                           <widget class="QLabel" name="label_angle">
+                            <property name="toolTip">
+                             <string>Define angle for the motion blur by giving a range [min degree,max degree]. Values in this range are then randomly picked for each image</string>
+                            </property>
+                            <property name="text">
+                             <string>Angle</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="0">
+                           <widget class="QCheckBox" name="checkBox_motionBlur">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="toolTip">
+                             <string>Apply random motion blurring. Motion blur is defined by an intensity ('kernel') and a direction ('angle'). Please define a range for 'kernel' and 'angle'. AID will pick a random value (within each range) for each image.</string>
+                            </property>
+                            <property name="text">
+                             <string>Motion</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="art.qrc">
+                              <normaloff>:/icon/icon/motion.png</normaloff>:/icon/icon/motion.png</iconset>
+                            </property>
+                            <property name="iconSize">
+                             <size>
+                              <width>20</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="1">
+                           <widget class="QLineEdit" name="lineEdit_motionBlurKernel">
+                            <property name="toolTip">
+                             <string>Define kernels by defining a range &quot;min,max&quot;. Values in this range are then randomly picked for each image</string>
+                            </property>
+                            <property name="text">
+                             <string>0,5</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="2">
+                           <widget class="QLineEdit" name="lineEdit_motionBlurAngle">
+                            <property name="toolTip">
+                             <string>Define angle for the motion blur by defining a range &quot;min degree,max degree&quot;. Values in this range are then randomly picked for each image</string>
+                            </property>
+                            <property name="text">
+                             <string>-10,10</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_Finalize">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Finalize and Fit</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_19">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QTextBrowser" name="textBrowser_Info">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_FitPlot">
+                   <item>
+                    <widget class="QPushButton" name="pushButton_FitModel">
+                     <property name="minimumSize">
+                      <size>
+                       <width>111</width>
+                       <height>60</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>111</width>
+                       <height>60</height>
+                      </size>
+                     </property>
+                     <property name="toolTip">
+                      <string>Afer defining all model parameters, hit this button to build/initialize the model, load the data to RAM (if 'Load data to RAM' is chosen in 'Edit') and start the fitting process. You can also do only the initialization to check the model summary (appears in textbox on the left).</string>
+                     </property>
+                     <property name="text">
+                      <string>Initialize/Fit
+Model</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="art.qrc">
+                       <normaloff>:/icon/icon/play.png</normaloff>:/icon/icon/play.png</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_history">
+      <attribute name="title">
+       <string>History</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_20">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_Live">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>28</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Load and display the model which is currently fitted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Live</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QPushButton" name="pushButton_LoadHistory">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select a history file to be plotted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Load History</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="2" colspan="2">
+        <widget class="QPushButton" name="pushButton_UpdateHistoryPlot">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Update plot</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" colspan="2">
+        <widget class="QCheckBox" name="checkBox_rollingMedian">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Rolling median</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4" colspan="2">
+        <widget class="QSlider" name="horizontalSlider_rollmedi">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>19</height>
+          </size>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="checkBox_linearFit">
+         <property name="text">
+          <string>Linear fit</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="6">
+        <widget class="QTableWidget" name="tableWidget_HistoryItems">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Information of the history file is shown here</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="6">
+        <widget class="QWidget" name="widget" native="true"/>
+       </item>
+       <item row="5" column="0" colspan="3">
+        <widget class="QLabel" name="label_loadAndConvertModel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Load and convert model</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="5">
+        <widget class="QPushButton" name="pushButton_loadModel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Load a specific model for conversion</string>
+         </property>
+         <property name="text">
+          <string>Load</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="6">
+        <widget class="QTextBrowser" name="textBrowser_SelectedModelInfo">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>61</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="3">
+        <widget class="QComboBox" name="comboBox_convertTo">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="toolTip">
+          <string>Choose a target file format</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="5">
+        <widget class="QPushButton" name="pushButton_convertModel">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Convert</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" colspan="3">
+        <widget class="QLineEdit" name="lineEdit_LoadHistory">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Enter path and filename of a history-file (.csv)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyTable</class>
+   <extends>QTableWidget</extends>
+   <header location="global">MyWidget</header>
+  </customwidget>
+  <customwidget>
+   <class>MySpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>MyWidget</header>
+  </customwidget>
+  <customwidget>
+   <class>MyDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>MyWidget</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="art.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>radioButton_NewModel</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_ModelSelection</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>119</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>433</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_LoadRestartModel</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_LoadModelPath</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_LoadContinueModel</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_LoadModelPath</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>430</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_gpu</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_gpu</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>515</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>422</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_rotation</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_Rotation</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>159</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_width_shift_2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_widthShift</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>302</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_height_shift</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_heightShift</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_zoom</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_zoomRange</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_shear_2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>lineEdit_shearRange</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>144</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>393</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_add</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinBox_PlusLower</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>466</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>466</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_add</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>spinBox_PlusUpper</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>466</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>466</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_mult</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBox_MultLower</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>500</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_mult</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBox_MultUpper</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>500</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_gauss_mean</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBox_GaussianNoiseMean</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>573</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>573</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_gauss_scale</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>doubleSpinBox_GaussianNoiseScale</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>607</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>416</x>
+     <y>607</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_cpu</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboBox_cpu</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>106</x>
+     <y>485</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>422</x>
+     <y>488</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_rollingMedian</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>horizontalSlider_rollmedi</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>477</x>
+     <y>96</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
