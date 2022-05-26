@@ -17,6 +17,13 @@ https://github.com/napari/cookiecutter-napari-plugin#getting-started
 and review the napari docs for plugin developers:
 https://napari.org/plugins/index.html
 -->
+
+## Installation
+
+You can install `napari-aideveloper` via [pip]:
+
+    pip install napari-aideveloper
+
 ## Introduction
 ### 1. Load data
 Drag and drop your data in .rtdc (HDF5) format into the file table and set the class and training/validation.
@@ -36,11 +43,7 @@ Drag and drop your data in .rtdc (HDF5) format into the file table and set the c
 #### Image augmentation
 
 
-## Installation
 
-You can install `napari-aideveloper` via [pip]:
-
-    pip install napari-aideveloper
 
 
 
