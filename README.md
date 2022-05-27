@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/zcqwh/napari-aideveloper/branch/main/graph/badge.svg)](https://codecov.io/gh/zcqwh/napari-aideveloper)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-aideveloper)](https://napari-hub.org/plugins/napari-aideveloper)
 
-[napari_aideveloper](https://www.napari-hub.org/plugins/napari-aideveloper) is a napari-plugin deived from [AIDeveloper](https://github.com/maikherbig/AIDeveloper) that allows you to train, evaluate and apply deep neural nets for image classification within a graphical user-interface (GUI).
+[napari_aideveloper](https://www.napari-hub.org/plugins/napari-aideveloper) is a napari-plugin derived from [AIDeveloper](https://github.com/maikherbig/AIDeveloper) that allows you to train, evaluate, and apply deep neural nets for image classification within a graphical user-interface (GUI).
 
 
 <!--
