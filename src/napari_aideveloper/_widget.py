@@ -1010,9 +1010,9 @@ class AIDeveloper(QtWidgets.QWidget):
         colPosition = item.column()
         rowPosition = item.row()
         #if Shuffle was clicked (col=8), check if this checkbox is not deactivated
-        if colPosition==8:
-            if bool(self.table_dragdrop.item(rowPosition, 8).checkState())==False:
-                rtdc_path = self.table_dragdrop.item(rowPosition, 0).text()
+        if colPosition==9:
+            if bool(self.table_dragdrop.item(rowPosition, 9).checkState())==False:
+                rtdc_path = self.table_dragdrop.item(rowPosition, 1).text()
                 rtdc_path = str(rtdc_path)
 
                 failed,rtdc_ds = aid_bin.load_rtdc(rtdc_path)
@@ -1026,14 +1026,14 @@ class AIDeveloper(QtWidgets.QWidget):
                     return
                 nr_images = rtdc_ds["events"]["image"].len()
 
-                columnPosition = 6
+                columnPosition = 7 #Ev./Ep.
                 item = QtWidgets.QTableWidgetItem()
                 item.setData(QtCore.Qt.DisplayRole, nr_images)
                 item.setFlags(item.flags() &~QtCore.Qt.ItemIsEnabled &~ QtCore.Qt.ItemIsSelectable )
                 self.table_dragdrop.setItem(rowPosition, columnPosition, item)
-            if bool(self.table_dragdrop.item(rowPosition, 8).checkState())==True:
+            if bool(self.table_dragdrop.item(rowPosition, 9).checkState())==True:
                 #Inspect this table item. If shuffle was checked before, it will be grayed out. Invert normal cell then
-                item = self.table_dragdrop.item(rowPosition, 6)
+                item = self.table_dragdrop.item(rowPosition, 7)
                 item.setFlags(item.flags() |QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable )
 
 # =============================================================================
@@ -1050,9 +1050,9 @@ class AIDeveloper(QtWidgets.QWidget):
 
 
     def item_dclick(self, item):
-        #Check/Uncheck if item is from column 2 or 3
+        #Check/Uncheck if item is from column 3(T) or 4()V
         tableitem = self.table_dragdrop.item(item.row(), item.column())
-        if item.column() in [2,3]:
+        if item.column() in [3,4]:
             #If the item is unchecked ->check it!
             if tableitem.checkState() == QtCore.Qt.Unchecked:
                 tableitem.setCheckState(QtCore.Qt.Checked)
@@ -1060,8 +1060,8 @@ class AIDeveloper(QtWidgets.QWidget):
             elif tableitem.checkState() == QtCore.Qt.Checked:
                 tableitem.setCheckState(QtCore.Qt.Unchecked)
 
-        #Show example image if item on column 0 was dclicked
-        if item.column() == 0:
+        #Show example image if item on column 1(file) was dclicked
+        if item.column() == 1: # 1 File
             rtdc_path = self.table_dragdrop.item(item.row(), item.column()).text()
 
             failed,rtdc_ds = aid_bin.load_rtdc(rtdc_path)
@@ -1097,7 +1097,7 @@ class AIDeveloper(QtWidgets.QWidget):
 
             #get the location of the cell
             rowPosition = item.row()
-            pix = float(self.table_dragdrop.item(rowPosition, 7).text())
+            pix = float(self.table_dragdrop.item(rowPosition, 8).text()) # 8 PIX
             #pix = rtdc_ds.config["imaging"]["pixel size"]
             PIX = pix
 
@@ -1278,7 +1278,7 @@ class AIDeveloper(QtWidgets.QWidget):
         buttonClicked = self.sender()
         index = self.table_dragdrop.indexAt(buttonClicked.pos())
         rowPosition = index.row()
-        rtdc_path = self.table_dragdrop.item(rowPosition, 0).text()
+        rtdc_path = self.table_dragdrop.item(rowPosition, 1).text()
         rtdc_path = str(rtdc_path)
 
         failed,rtdc_ds = aid_bin.load_rtdc(rtdc_path)
