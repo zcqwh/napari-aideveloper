@@ -23,6 +23,7 @@ import pandas as pd
 import pyqtgraph as pg
 import tensorflow as tf
 from qtpy import QtCore, QtGui, QtWidgets, uic
+from .UI import MyWidget
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import (load_model, model_from_config,
                                      model_from_json)
@@ -41,6 +42,7 @@ tooltips = aid_start.get_tooltips()
 from tensorflow.python.client import device_lib
 
 dir_root = os.path.dirname(__file__)#ask the module for its origin
+sys.path.append(os.path.join(dir_root,"UI")) # For finding CustomWidget
 dir_settings = os.path.join(dir_root,"aid_settings.json")#dir to settings
 Default_dict = aid_start.get_default_dict(dir_settings)
 
