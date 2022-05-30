@@ -224,253 +224,13 @@ class WorkerSignals(QtCore.QObject):
 
 
 class Fitting_Ui(QtWidgets.QWidget):
+    def __init__(self):
+        super(Fitting_Ui, self).__init__()
+        uic.loadUi(os.path.join(dir_root,"UI","PopupFitting.ui"),self)
+        
 
-    def setupUi(self, Form):
-        self.Form = Form
-        Form.setObjectName(_fromUtf8("Form"))
-        Form.resize(850, 786)
-        Form.setStyleSheet(open(os.path.join(dir_root,"art","styles","00_base.qss")).read())
-
-        self.gridLayout_4 = QtWidgets.QGridLayout(Form)
-        self.gridLayout_4.setObjectName("gridLayout_4")
-        self.verticalLayout_4_pop = QtWidgets.QVBoxLayout()
-        self.verticalLayout_4_pop.setObjectName("verticalLayout_4_pop")
-        self.horizontalLayout_pop = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_pop.setObjectName("horizontalLayout_pop")
-        self.groupBox = QtWidgets.QGroupBox(Form)
-        self.groupBox.setObjectName("groupBox")
-        self.gridLayout_5 = QtWidgets.QGridLayout(self.groupBox)
-        self.gridLayout_5.setObjectName("gridLayout_5")
-        self.tableWidget_HistoryInfo_pop = QtWidgets.QTableWidget(self.groupBox)
-        self.tableWidget_HistoryInfo_pop.setObjectName("tableWidget_HistoryInfo_pop")
-        self.tableWidget_HistoryInfo_pop.setColumnCount(7)
-        self.tableWidget_HistoryInfo_pop.setRowCount(0)
-        self.gridLayout_5.addWidget(self.tableWidget_HistoryInfo_pop, 0, 0, 1, 1)
-        self.horizontalLayout_pop.addWidget(self.groupBox)
-        self.verticalLayout_2_pop = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2_pop.setObjectName("verticalLayout_2_pop")
-        self.pushButton_UpdatePlot_pop = QtWidgets.QPushButton(Form)
-        self.pushButton_UpdatePlot_pop.setObjectName("pushButton_UpdatePlot_pop")
-        self.verticalLayout_2_pop.addWidget(self.pushButton_UpdatePlot_pop)
-        self.checkBox_realTimePlotting_pop = QtWidgets.QCheckBox(Form)
-        self.checkBox_realTimePlotting_pop.setChecked(True)
-        self.checkBox_realTimePlotting_pop.setObjectName("checkBox_realTimePlotting_pop")
-        self.verticalLayout_2_pop.addWidget(self.checkBox_realTimePlotting_pop)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label_realTimeEpochs_pop = QtWidgets.QLabel(Form)
-        self.label_realTimeEpochs_pop.setObjectName("label_realTimeEpochs_pop")
-        self.horizontalLayout.addWidget(self.label_realTimeEpochs_pop)
-        self.spinBox_realTimeEpochs = QtWidgets.QSpinBox(Form)
-        self.spinBox_realTimeEpochs.setMinimum(1)
-        self.spinBox_realTimeEpochs.setMaximum(9999999)
-        self.spinBox_realTimeEpochs.setProperty("value", 250)
-        self.spinBox_realTimeEpochs.setObjectName("spinBox_realTimeEpochs")
-        self.horizontalLayout.addWidget(self.spinBox_realTimeEpochs)
-        self.verticalLayout_2_pop.addLayout(self.horizontalLayout)
-        self.horizontalLayout_pop.addLayout(self.verticalLayout_2_pop)
-        self.verticalLayout_4_pop.addLayout(self.horizontalLayout_pop)
-        self.verticalLayout_3_pop = QtWidgets.QVBoxLayout()
-        self.verticalLayout_3_pop.setObjectName("verticalLayout_3_pop")
-        self.widget_pop = pg.GraphicsLayoutWidget(Form) #self.widget_pop = QtWidgets.QWidget(Form)
-        self.widget_pop.setMinimumSize(771, 331)
-        self.widget_pop.setObjectName("widget_pop")
-        self.verticalLayout_3_pop.addWidget(self.widget_pop)
-        self.splitter_pop = QtWidgets.QSplitter(Form)
-        self.splitter_pop.setOrientation(QtCore.Qt.Horizontal)
-        self.splitter_pop.setObjectName("splitter_pop")
-        self.groupBox_FittingInfo_pop = QtWidgets.QGroupBox(self.splitter_pop)
-        self.groupBox_FittingInfo_pop.setObjectName("groupBox_FittingInfo_pop")
-        self.gridLayout_2_pop = QtWidgets.QGridLayout(self.groupBox_FittingInfo_pop)
-        self.gridLayout_2_pop.setObjectName("gridLayout_2_pop")
-        self.progressBar_Fitting_pop = QtWidgets.QProgressBar(self.groupBox_FittingInfo_pop)
-        self.progressBar_Fitting_pop.setProperty("value", 24)
-        self.progressBar_Fitting_pop.setObjectName("progressBar_Fitting_pop")
-        self.gridLayout_2_pop.addWidget(self.progressBar_Fitting_pop, 0, 0, 1, 1)
-        self.textBrowser_FittingInfo = QtWidgets.QTextBrowser(self.groupBox_FittingInfo_pop)
-        self.textBrowser_FittingInfo.setObjectName("textBrowser_FittingInfo")
-        self.gridLayout_2_pop.addWidget(self.textBrowser_FittingInfo, 1, 0, 1, 1)
-        self.horizontalLayout_saveClearText_pop = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_saveClearText_pop.setObjectName("horizontalLayout_saveClearText_pop")
-        self.pushButton_saveTextWindow_pop = QtWidgets.QPushButton(self.groupBox_FittingInfo_pop)
-        self.pushButton_saveTextWindow_pop.setObjectName("pushButton_saveTextWindow_pop")
-        self.horizontalLayout_saveClearText_pop.addWidget(self.pushButton_saveTextWindow_pop)
-        self.pushButton_clearTextWindow_pop = QtWidgets.QPushButton(self.groupBox_FittingInfo_pop)
-        self.pushButton_clearTextWindow_pop.setObjectName("pushButton_clearTextWindow_pop")
-        self.horizontalLayout_saveClearText_pop.addWidget(self.pushButton_clearTextWindow_pop)
-        self.gridLayout_2_pop.addLayout(self.horizontalLayout_saveClearText_pop, 2, 0, 1, 1)
-        self.groupBox_ChangeModel_pop = QtWidgets.QGroupBox(self.splitter_pop)
-        self.groupBox_ChangeModel_pop.setEnabled(True)
-        self.groupBox_ChangeModel_pop.setCheckable(False)
-        self.groupBox_ChangeModel_pop.setObjectName("groupBox_ChangeModel_pop")
-        self.gridLayout = QtWidgets.QGridLayout(self.groupBox_ChangeModel_pop)
-        self.gridLayout.setObjectName("gridLayout")
-        self.groupBox_expt_imgProc_pop = QtWidgets.QGroupBox(self.groupBox_ChangeModel_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.groupBox_expt_imgProc_pop.sizePolicy().hasHeightForWidth())
-        self.groupBox_expt_imgProc_pop.setSizePolicy(sizePolicy)
-        self.groupBox_expt_imgProc_pop.setObjectName("groupBox_expt_imgProc_pop")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox_expt_imgProc_pop)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.label_icon_padding = QtWidgets.QLabel(self.groupBox_expt_imgProc_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_icon_padding.sizePolicy().hasHeightForWidth())
-        self.label_icon_padding.setSizePolicy(sizePolicy)
-        self.label_icon_padding.setMinimumSize(21, 21)
-        self.label_icon_padding.setMaximumSize(21, 21)
-        self.label_icon_padding.setText("")
-        self.label_icon_padding.setPixmap(QtGui.QPixmap(os.path.join(dir_root, "art","Icon","padding.png")))
-        self.label_icon_padding.setScaledContents(True)
-        self.label_icon_padding.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_icon_padding.setObjectName("label_icon_padding")
-        self.gridLayout_2.addWidget(self.label_icon_padding, 0, 0, 1, 1)
-        self.label_paddingMode_pop = QtWidgets.QLabel(self.groupBox_expt_imgProc_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_paddingMode_pop.sizePolicy().hasHeightForWidth())
-        self.label_paddingMode_pop.setSizePolicy(sizePolicy)
-        self.label_paddingMode_pop.setObjectName("label_paddingMode_pop")
-        self.gridLayout_2.addWidget(self.label_paddingMode_pop, 0, 1, 1, 1)
-        self.comboBox_paddingMode_pop = QtWidgets.QComboBox(self.groupBox_expt_imgProc_pop)
-        self.comboBox_paddingMode_pop.setEnabled(True)
-        self.comboBox_paddingMode_pop.setObjectName("comboBox_paddingMode_pop")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.comboBox_paddingMode_pop.addItem("")
-        self.gridLayout_2.addWidget(self.comboBox_paddingMode_pop, 0, 2, 1, 1)
-        self.gridLayout.addWidget(self.groupBox_expt_imgProc_pop, 0, 0, 1, 5)
-        self.groupBox_system_pop = QtWidgets.QGroupBox(self.groupBox_ChangeModel_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.groupBox_system_pop.sizePolicy().hasHeightForWidth())
-        self.groupBox_system_pop.setSizePolicy(sizePolicy)
-        self.groupBox_system_pop.setObjectName("groupBox_system_pop")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.groupBox_system_pop)
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.spinBox_NrEpochs = QtWidgets.QSpinBox(self.groupBox_system_pop)
-        self.spinBox_NrEpochs.setMinimum(1)
-        self.spinBox_NrEpochs.setMaximum(999999999)
-        self.spinBox_NrEpochs.setObjectName("spinBox_NrEpochs")
-        self.gridLayout_3.addWidget(self.spinBox_NrEpochs, 0, 2, 1, 1)
-        self.label_saveMetaEvery = QtWidgets.QLabel(self.groupBox_system_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_saveMetaEvery.sizePolicy().hasHeightForWidth())
-        self.label_saveMetaEvery.setSizePolicy(sizePolicy)
-        self.label_saveMetaEvery.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_saveMetaEvery.setObjectName("label_saveMetaEvery")
-        self.gridLayout_3.addWidget(self.label_saveMetaEvery, 0, 3, 1, 1)
-        self.spinBox_saveMetaEvery = QtWidgets.QSpinBox(self.groupBox_system_pop)
-        self.spinBox_saveMetaEvery.setMinimum(1)
-        self.spinBox_saveMetaEvery.setMaximum(999999)
-        self.spinBox_saveMetaEvery.setProperty("value", 30)
-        self.spinBox_saveMetaEvery.setObjectName("spinBox_saveMetaEvery")
-        self.gridLayout_3.addWidget(self.spinBox_saveMetaEvery, 0, 4, 1, 1)
-        self.label_Crop_NrEpochs_pop = QtWidgets.QLabel(self.groupBox_system_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_Crop_NrEpochs_pop.sizePolicy().hasHeightForWidth())
-        self.label_Crop_NrEpochs_pop.setSizePolicy(sizePolicy)
-        self.label_Crop_NrEpochs_pop.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_Crop_NrEpochs_pop.setObjectName("label_Crop_NrEpochs_pop")
-        self.gridLayout_3.addWidget(self.label_Crop_NrEpochs_pop, 0, 1, 1, 1)
-        self.label_icon_epochs = QtWidgets.QLabel(self.groupBox_system_pop)
-        self.label_icon_epochs.setMinimumSize(20, 20)
-        self.label_icon_epochs.setMaximumSize(20, 20)
-        self.label_icon_epochs.setText("")
-        self.label_icon_epochs.setPixmap(QtGui.QPixmap(os.path.join(dir_root,"art","Icon","nr_epochs.png")))
-        self.label_icon_epochs.setScaledContents(True)
-        self.label_icon_epochs.setObjectName("label_icon_epochs")
-        self.gridLayout_3.addWidget(self.label_icon_epochs, 0, 0, 1, 1)
-        self.gridLayout.addWidget(self.groupBox_system_pop, 1, 0, 1, 5)
-        self.splitter = QtWidgets.QSplitter(self.groupBox_ChangeModel_pop)
-        self.splitter.setOrientation(QtCore.Qt.Horizontal)
-        self.splitter.setObjectName("splitter")
-        self.pushButton_showModelSumm_pop = QtWidgets.QPushButton(self.splitter)
-        self.pushButton_showModelSumm_pop.setObjectName("pushButton_showModelSumm_pop")
-        self.pushButton_saveModelSumm_pop = QtWidgets.QPushButton(self.splitter)
-        self.pushButton_saveModelSumm_pop.setObjectName("pushButton_saveModelSumm_pop")
-        self.gridLayout.addWidget(self.splitter, 2, 0, 1, 5)
-        self.checkBox_ApplyNextEpoch = QtWidgets.QCheckBox(self.groupBox_ChangeModel_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.checkBox_ApplyNextEpoch.sizePolicy().hasHeightForWidth())
-        self.checkBox_ApplyNextEpoch.setSizePolicy(sizePolicy)
-        self.checkBox_ApplyNextEpoch.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.checkBox_ApplyNextEpoch.setAutoFillBackground(False)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(os.path.join(dir_root, "art","Icon","thumb.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.checkBox_ApplyNextEpoch.setIconSize(QtCore.QSize(20, 20))
-        self.checkBox_ApplyNextEpoch.setIcon(icon)
-        self.checkBox_ApplyNextEpoch.setTristate(False)
-        self.checkBox_ApplyNextEpoch.setObjectName("checkBox_ApplyNextEpoch")
-        self.gridLayout.addWidget(self.checkBox_ApplyNextEpoch, 3, 0, 1, 1)
-        self.checkBox_saveEpoch_pop = QtWidgets.QCheckBox(self.groupBox_ChangeModel_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.checkBox_saveEpoch_pop.sizePolicy().hasHeightForWidth())
-        self.checkBox_saveEpoch_pop.setSizePolicy(sizePolicy)
-        self.checkBox_saveEpoch_pop.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(os.path.join(dir_root, "art","Icon","save_epoch.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.checkBox_saveEpoch_pop.setIconSize(QtCore.QSize(20, 20))
-        self.checkBox_saveEpoch_pop.setIcon(icon1)
-        self.checkBox_saveEpoch_pop.setObjectName("checkBox_saveEpoch_pop")
-        self.gridLayout.addWidget(self.checkBox_saveEpoch_pop, 3, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(42, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 3, 2, 1, 1)
-        self.pushButton_Pause_pop = QtWidgets.QPushButton(self.groupBox_ChangeModel_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_Pause_pop.sizePolicy().hasHeightForWidth())
-        self.pushButton_Pause_pop.setSizePolicy(sizePolicy)
-        self.pushButton_Pause_pop.setMinimumSize(60, 40)
-        self.pushButton_Pause_pop.setMaximumSize(60, 40)
-        self.pushButton_Pause_pop.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(os.path.join(dir_root, "art","Icon","pause.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_Pause_pop.setIcon(icon2)
-        self.pushButton_Pause_pop.setIconSize(QtCore.QSize(30, 30))
-        self.pushButton_Pause_pop.setObjectName("pushButton_Pause_pop")
-        self.gridLayout.addWidget(self.pushButton_Pause_pop, 3, 3, 1, 1)
-        self.pushButton_Stop_pop = QtWidgets.QPushButton(self.groupBox_ChangeModel_pop)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_Stop_pop.sizePolicy().hasHeightForWidth())
-        self.pushButton_Stop_pop.setSizePolicy(sizePolicy)
-        self.pushButton_Stop_pop.setMinimumSize(60, 40)
-        self.pushButton_Stop_pop.setMaximumSize(60, 40)
-        self.pushButton_Stop_pop.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(os.path.join(dir_root, "art","Icon","stop.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_Stop_pop.setIcon(icon3)
-        self.pushButton_Stop_pop.setIconSize(QtCore.QSize(18, 18))
-        self.pushButton_Stop_pop.setObjectName("pushButton_Stop_pop")
-        self.gridLayout.addWidget(self.pushButton_Stop_pop, 3, 4, 1, 1)
-        self.verticalLayout_3_pop.addWidget(self.splitter_pop)
-        self.verticalLayout_4_pop.addLayout(self.verticalLayout_3_pop)
-        self.gridLayout_4.addLayout(self.verticalLayout_4_pop, 0, 0, 1, 1)
-
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-          #####################Some manual settings##############################
+        QtCore.QMetaObject.connectSlotsByName(self)
+        #####################Some manual settings##############################
         #######################################################################
         ###########################Variables###################################
         self.Histories = [] #List container for the fitting histories, that are produced by the keras.fit function that is controlled by this popup
@@ -482,57 +242,7 @@ class Fitting_Ui(QtWidgets.QWidget):
         self.threadpool_quad_count = 0 #count nr. of threads in queue;
         self.clr_settings = {} #variable to store step_size and gamma, will be filled with information when starting to fit
         self.optimizer_settings = {} #dict to store advanced optimizer settings
-
         self.epoch_counter = 0 #Counts the nr. of epochs
-
-    def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.groupBox.setTitle(_translate("Form", "Metrics keys"))
-        self.pushButton_UpdatePlot_pop.setText(_translate("Form", "Update Plot"))
-        self.checkBox_realTimePlotting_pop.setToolTip(_translate("Form", "<html><head/><body><p>Add for each curve a rolling median curve, which uses a window size of 10</p></body></html>"))
-        self.checkBox_realTimePlotting_pop.setText(_translate("Form", "Real time plotting"))
-        self.label_realTimeEpochs_pop.setText(_translate("Form", "Nr. of epochs for RT"))
-        self.groupBox_FittingInfo_pop.setTitle(_translate("Form", "Fitting Info"))
-        self.pushButton_saveTextWindow_pop.setText(_translate("Form", "Save text "))
-        self.pushButton_clearTextWindow_pop.setToolTip(_translate("Form", "Clear the text window (fitting info)"))
-        self.pushButton_clearTextWindow_pop.setText(_translate("Form", "Clear text"))
-        self.groupBox_ChangeModel_pop.setTitle(_translate("Form", "Change fitting parameters"))
-        self.groupBox_expt_imgProc_pop.setTitle(_translate("Form", "Image processing"))
-        self.label_paddingMode_pop.setText(_translate("Form", "Padding mode"))
-        self.comboBox_paddingMode_pop.setToolTip(_translate("Form", "By default, the padding mode is \"constant\", which means that zeros are padded.\n"
-"\"edge\": Pads with the edge values of array.\n"
-"\"linear_ramp\": Pads with the linear ramp between end_value and the array edge value.\n"
-"\"maximum\": Pads with the maximum value of all or part of the vector along each axis.\n"
-"\"mean\": Pads with the mean value of all or part of the vector along each axis.\n"
-"\"median\": Pads with the median value of all or part of the vector along each axis.\n"
-"\"minimum\": Pads with the minimum value of all or part of the vector along each axis.\n"
-"\"reflect\": Pads with the reflection of the vector mirrored on the first and last values of the vector along each axis.\n"
-"\"symmetric\": Pads with the reflection of the vector mirrored along the edge of the array.\n"
-"\"wrap\": Pads with the wrap of the vector along the axis. The first values are used to pad the end and the end values are used to pad the beginning.\n"
-"Text copied from https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html"))
-        self.comboBox_paddingMode_pop.setItemText(0, _translate("Form", "constant"))
-        self.comboBox_paddingMode_pop.setItemText(1, _translate("Form", "edge"))
-        self.comboBox_paddingMode_pop.setItemText(2, _translate("Form", "linear_ramp"))
-        self.comboBox_paddingMode_pop.setItemText(3, _translate("Form", "maximum"))
-        self.comboBox_paddingMode_pop.setItemText(4, _translate("Form", "mean"))
-        self.comboBox_paddingMode_pop.setItemText(5, _translate("Form", "median"))
-        self.comboBox_paddingMode_pop.setItemText(6, _translate("Form", "minimum"))
-        self.groupBox_system_pop.setTitle(_translate("Form", "Training"))
-        self.spinBox_NrEpochs.setToolTip(_translate("Form", "Total number of training iterations"))
-        self.label_saveMetaEvery.setText(_translate("Form", "Save meta every (sec)"))
-        self.label_Crop_NrEpochs_pop.setToolTip(_translate("Form", "Total number of training iterations"))
-        self.label_Crop_NrEpochs_pop.setText(_translate("Form", "Nr. epochs"))
-        self.pushButton_showModelSumm_pop.setText(_translate("Form", "Show model summary"))
-        self.pushButton_saveModelSumm_pop.setText(_translate("Form", "Save model summary"))
-        self.checkBox_ApplyNextEpoch.setToolTip(_translate("Form", "Changes made in this window will be applied at the next epoch"))
-        self.checkBox_ApplyNextEpoch.setText(_translate("Form", "Apply at next epoch"))
-        self.checkBox_saveEpoch_pop.setToolTip(_translate("Form", "Save the model, when the current epoch is done"))
-        self.checkBox_saveEpoch_pop.setText(_translate("Form", "Save epoch"))
-        self.pushButton_Pause_pop.setToolTip(_translate("Form", "Pause fitting, push this button again to continue"))
-        self.pushButton_Stop_pop.setToolTip(_translate("Form", "Stop fitting entirely, Close this window manually, after the progressbar shows 100%"))
-
-
 
 
 class AIDeveloper(QtWidgets.QWidget):
@@ -687,12 +397,14 @@ class AIDeveloper(QtWidgets.QWidget):
             
             columnPosition = 1 #File
             line = QtWidgets.QTableWidgetItem()
-            line.setText(url)
+            line.setText(url) # When there is / in the string, the left side cannot be elided.
+            #line.setTextAlignment(QtCore.Qt.AlignLeft)
+            #line.setTextElideMode(QtCore.Qt.ElideLeft)
             line.setFlags( QtCore.Qt.ItemIsSelectable |  QtCore.Qt.ItemIsEnabled )
             line.setToolTip(url)
 
-            self.table_dragdrop.setItem(rowPosition, columnPosition, line)
             self.table_dragdrop.setColumnWidth(columnPosition,100)
+            self.table_dragdrop.setItem(rowPosition, columnPosition, line)
             
 
             columnPosition = 2 #Class
@@ -704,8 +416,8 @@ class AIDeveloper(QtWidgets.QWidget):
 
                                     "QComboBox:drop-down {"
                                     "width:20px; "
-                                    "subcontrol-position: right center; "  # 位置
-                                    "subcontrol-origin: padding;}\n"  # 对齐方式
+                                    "subcontrol-position: right center; "  # position
+                                    "subcontrol-origin: padding;}\n"  # alignment
                                     )
 
             comboBox.currentIndexChanged.connect(self.dataOverviewOn)
@@ -2690,46 +2402,47 @@ class AIDeveloper(QtWidgets.QWidget):
            msg.exec_()
 
         ###################Popup Window####################################
-        self.fittingpopups.append(MyPopup())
-        ui = Fitting_Ui()
-        ui.setupUi(self.fittingpopups[-1]) #append the ui to the last element on the list
-        self.fittingpopups_ui.append(ui)
-        # Increase the popupcounter by one; this will help to coordinate the data flow between main ui and popup
-        self.popupcounter += 1
-        listindex=self.popupcounter-1
+        self.fittingpopups = Fitting_Ui()
+# =============================================================================
+#         ###################Popup Window####################################
+#         self.fittingpopups= MyPopup()
+#         ui = Fitting_Ui()
+#         ui.setupUi(self.fittingpopups)
+# =============================================================================
+        
 
         ##############################Define functions#########################
-        self.fittingpopups_ui[listindex].pushButton_UpdatePlot_pop.clicked.connect(lambda: self.update_historyplot_pop(listindex))
-        self.fittingpopups_ui[listindex].pushButton_Stop_pop.clicked.connect(lambda: self.stop_fitting_pop(listindex))
-        self.fittingpopups_ui[listindex].pushButton_Pause_pop.clicked.connect(lambda: self.pause_fitting_pop(listindex))
-        self.fittingpopups_ui[listindex].pushButton_saveTextWindow_pop.clicked.connect(lambda: self.saveTextWindow_pop(listindex))
-        self.fittingpopups_ui[listindex].pushButton_clearTextWindow_pop.clicked.connect(lambda: self.clearTextWindow_pop(listindex))
-        self.fittingpopups_ui[listindex].pushButton_showModelSumm_pop.clicked.connect(lambda: self.showModelSumm_pop(listindex))
-        self.fittingpopups_ui[listindex].pushButton_saveModelSumm_pop.clicked.connect(lambda: self.saveModelSumm_pop(listindex))
+        self.fittingpopups.pushButton_UpdatePlot_pop.clicked.connect(self.update_historyplot_pop)
+        self.fittingpopups.pushButton_Stop_pop.clicked.connect(self.stop_fitting_pop)
+        self.fittingpopups.pushButton_Pause_pop.clicked.connect(self.pause_fitting_pop)
+        self.fittingpopups.pushButton_saveTextWindow_pop.clicked.connect(self.saveTextWindow_pop)
+        self.fittingpopups.pushButton_clearTextWindow_pop.clicked.connect(self.clearTextWindow_pop)
+        self.fittingpopups.pushButton_showModelSumm_pop.clicked.connect(self.showModelSumm_pop)
+        self.fittingpopups.pushButton_saveModelSumm_pop.clicked.connect(self.saveModelSumm_pop)
         #Expert mode functions
-        #self.fittingpopups_ui[listindex].checkBox_pTr_pop.toggled.connect(lambda on_or_off: self.partialtrainability_activated_pop(on_or_off,listindex))
+        #self.fittingpopups.checkBox_pTr_pop.toggled.connect(lambda on_or_off: self.partialtrainability_activated_pop(on_or_off,listindex))
 
-        self.fittingpopups_ui[listindex].Form.setWindowTitle(os.path.split(new_modelname)[1])
-        self.fittingpopups_ui[listindex].progressBar_Fitting_pop.setValue(0) #set the progress bar to zero
-        self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.doubleClicked.connect(lambda item: self.tableWidget_HistoryInfo_pop_dclick(item,listindex))
+        self.fittingpopups.setWindowTitle(os.path.split(new_modelname)[1])
+        self.fittingpopups.progressBar_Fitting_pop.setValue(0) #set the progress bar to zero
+        self.fittingpopups.tableWidget_HistoryInfo_pop.doubleClicked.connect(lambda item: self.tableWidget_HistoryInfo_pop_dclick(item))
 
 
 
         worker = Worker(self.action_fit_model_worker)
         #Get a signal from the worker to update the progressbar
-        worker.signals.progress.connect(self.fittingpopups_ui[listindex].progressBar_Fitting_pop.setValue)
+        worker.signals.progress.connect(self.fittingpopups.progressBar_Fitting_pop.setValue)
 
         #Define a func which prints information during fitting to textbrowser
         #And furthermore provide option to do real-time plotting
         def real_time_info(dic):
-            self.fittingpopups_ui[listindex].Histories.append(dic) #append to a list. Will be used for plotting in the "Update plot" function
-            OtherMetrics_keys = self.fittingpopups_ui[listindex].RealTime_OtherMetrics.keys()
+            self.fittingpopups.Histories.append(dic) #append to a list. Will be used for plotting in the "Update plot" function
+            OtherMetrics_keys = self.fittingpopups.RealTime_OtherMetrics.keys()
 
             #Append to lists for real-time plotting
-            self.fittingpopups_ui[listindex].RealTime_Acc.append(dic["accuracy"][0])
-            self.fittingpopups_ui[listindex].RealTime_ValAcc.append(dic["val_accuracy"][0])
-            self.fittingpopups_ui[listindex].RealTime_Loss.append(dic["loss"][0])
-            self.fittingpopups_ui[listindex].RealTime_ValLoss.append(dic["val_loss"][0])
+            self.fittingpopups.RealTime_Acc.append(dic["accuracy"][0])
+            self.fittingpopups.RealTime_ValAcc.append(dic["val_accuracy"][0])
+            self.fittingpopups.RealTime_Loss.append(dic["loss"][0])
+            self.fittingpopups.RealTime_ValLoss.append(dic["val_loss"][0])
 
 
             keys = list(dic.keys())
@@ -2748,19 +2461,19 @@ class AIDeveloper(QtWidgets.QWidget):
 
             for key in keys:
                 if "precision" in key or "auc" in key or "recall" in key or "LearningRate" in key:
-                    if not key in OtherMetrics_keys: #if this key is missing in self.fittingpopups_ui[listindex].RealTime_OtherMetrics attach it!
-                        self.fittingpopups_ui[listindex].RealTime_OtherMetrics[key] = []
-                    self.fittingpopups_ui[listindex].RealTime_OtherMetrics[key].append(dic[key])
+                    if not key in OtherMetrics_keys: #if this key is missing in self.fittingpopups.RealTime_OtherMetrics attach it!
+                        self.fittingpopups.RealTime_OtherMetrics[key] = []
+                    self.fittingpopups.RealTime_OtherMetrics[key].append(dic[key])
             dic_text = [(f"{item} {np.round(amount[0],4)}") for item, amount in dic.items()]
-            text = "Epoch "+str(self.fittingpopups_ui[listindex].epoch_counter)+"\n"+" ".join(dic_text)
-            self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
-            self.fittingpopups_ui[listindex].epoch_counter+=1
-            if self.fittingpopups_ui[listindex].epoch_counter==1:
+            text = "Epoch "+str(self.fittingpopups.epoch_counter)+"\n"+" ".join(dic_text)
+            self.fittingpopups.textBrowser_FittingInfo.append(text)
+            self.fittingpopups.epoch_counter+=1
+            if self.fittingpopups.epoch_counter==1:
 
                 #for each key, put a checkbox on the tableWidget_HistoryInfo_pop
-                rowPosition = self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.rowCount()
-                self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.insertRow(rowPosition)
-                self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.setColumnCount(len(keys))
+                rowPosition = self.fittingpopups.tableWidget_HistoryInfo_pop.rowCount()
+                self.fittingpopups.tableWidget_HistoryInfo_pop.insertRow(rowPosition)
+                self.fittingpopups.tableWidget_HistoryInfo_pop.setColumnCount(len(keys))
 
                 for columnPosition in range(len(keys)):#(2,4):
                     key = keys[columnPosition]
@@ -2770,64 +2483,64 @@ class AIDeveloper(QtWidgets.QWidget):
                     item.setBackground(QtGui.QColor(self.colorsQt[columnPosition]))
                     item.setFlags( QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled  )
                     item.setCheckState(QtCore.Qt.Unchecked)
-                    self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.setItem(rowPosition, columnPosition, item)
+                    self.fittingpopups.tableWidget_HistoryInfo_pop.setItem(rowPosition, columnPosition, item)
 
-            self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.resizeColumnsToContents()
-            self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.resizeRowsToContents()
+            self.fittingpopups.tableWidget_HistoryInfo_pop.resizeColumnsToContents()
+            self.fittingpopups.tableWidget_HistoryInfo_pop.resizeRowsToContents()
 
 
             ########################Real-time plotting#########################
-            if self.fittingpopups_ui[listindex].checkBox_realTimePlotting_pop.isChecked():
+            if self.fittingpopups.checkBox_realTimePlotting_pop.isChecked():
                 #get the range for the real time fitting
-                if hasattr(self.fittingpopups_ui[listindex], 'historyscatters'):#if update plot was hit before
-                    x = range(len(self.fittingpopups_ui[listindex].Histories))
-                    realTimeEpochs = self.fittingpopups_ui[listindex].spinBox_realTimeEpochs.value()
+                if hasattr(self.fittingpopups, 'historyscatters'):#if update plot was hit before
+                    x = range(len(self.fittingpopups.Histories))
+                    realTimeEpochs = self.fittingpopups.spinBox_realTimeEpochs.value()
                     if len(x)>realTimeEpochs:
                         x = x[-realTimeEpochs:]
                     #is any metric checked on the table?
-                    colcount = int(self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.columnCount())
+                    colcount = int(self.fittingpopups.tableWidget_HistoryInfo_pop.columnCount())
                     #Collect items that are checked
                     selected_items,Colors = [],[]
                     for colposition in range(colcount):
                         #is it checked?
-                        cb = self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.item(0, colposition)
+                        cb = self.fittingpopups.tableWidget_HistoryInfo_pop.item(0, colposition)
                         if not cb==None:
                             if cb.checkState() == QtCore.Qt.Checked:
                                 selected_items.append(str(cb.text()))
                                 Colors.append(cb.background())
 
-                    for i in range(len(self.fittingpopups_ui[listindex].historyscatters)): #iterate over all available plots
-                        key = list(self.fittingpopups_ui[listindex].historyscatters.keys())[i]
+                    for i in range(len(self.fittingpopups.historyscatters)): #iterate over all available plots
+                        key = list(self.fittingpopups.historyscatters.keys())[i]
                         if key in selected_items:
                             if key=="accuracy":
-                                y = np.array(self.fittingpopups_ui[listindex].RealTime_Acc).astype(float)
+                                y = np.array(self.fittingpopups.RealTime_Acc).astype(float)
                             elif key=="val_accuracy":
-                                y = np.array(self.fittingpopups_ui[listindex].RealTime_ValAcc).astype(float)
+                                y = np.array(self.fittingpopups.RealTime_ValAcc).astype(float)
                             elif key=="loss":
-                                y = np.array(self.fittingpopups_ui[listindex].RealTime_Loss).astype(float)
+                                y = np.array(self.fittingpopups.RealTime_Loss).astype(float)
                             elif key=="val_loss":
-                                y = np.array(self.fittingpopups_ui[listindex].RealTime_ValLoss).astype(float)
+                                y = np.array(self.fittingpopups.RealTime_ValLoss).astype(float)
                             elif "precision" in key or "auc" in key or "recall" in key or "LearningRate" in key:
-                               y = np.array(self.fittingpopups_ui[listindex].RealTime_OtherMetrics[key]).astype(float).reshape(-1,)
+                               y = np.array(self.fittingpopups.RealTime_OtherMetrics[key]).astype(float).reshape(-1,)
                             else:
                                 return
                             #Only show the last 250 epochs
                             if y.shape[0]>realTimeEpochs:
                                 y = y[-realTimeEpochs:]
                             if y.shape[0]==len(x):
-                                self.fittingpopups_ui[listindex].historyscatters[key].setData(x, y)#,pen=None,symbol='o',symbolPen=None,symbolBrush=brush,clear=False)
+                                self.fittingpopups.historyscatters[key].setData(x, y)#,pen=None,symbol='o',symbolPen=None,symbolBrush=brush,clear=False)
                             else:
                                 print("x and y are not the same size! Omitted plotting. I will try again to plot after the next epoch.")
 
                         pg.QtGui.QApplication.processEvents()
 
-        self.fittingpopups_ui[listindex].epoch_counter = 0
-        #self.fittingpopups_ui[listindex].backup = [] #backup of the meta information -> in case the original folder is not accessible anymore
+        self.fittingpopups.epoch_counter = 0
+        #self.fittingpopups.backup = [] #backup of the meta information -> in case the original folder is not accessible anymore
         worker.signals.history.connect(real_time_info)
 
         #Finally start the worker!
         self.threadpool.start(worker)
-        self.fittingpopups[listindex].show()
+        self.fittingpopups.show()
 
 
 
@@ -3079,14 +2792,14 @@ class AIDeveloper(QtWidgets.QWidget):
             cycLrMin = []
             cycLrMax = []
             cycLrMethod = "triangular"
-            #clr_settings = self.fittingpopups_ui[listindex].clr_settings.copy()
+            #clr_settings = self.fittingpopups.clr_settings.copy()
             cycLrGamma = self.clr_settings["gamma"]
             SelectedFiles = self.items_clicked()#to compute cycLrStepSize, the number of training images is needed
             cycLrStepSize = aid_dl.get_cyclStepSize(SelectedFiles,self.clr_settings["step_size"],batchSize_expert)
             #put clr_settings onto fittingpopup,
-            self.fittingpopups_ui[listindex].clr_settings = self.clr_settings.copy()#assign a copy. Otherwise values in both dicts are changed when manipulating one dict
+            self.fittingpopups.clr_settings = self.clr_settings.copy()#assign a copy. Otherwise values in both dicts are changed when manipulating one dict
             #put optimizer_settings onto fittingpopup,
-            self.fittingpopups_ui[listindex].optimizer_settings = self.optimizer_settings.copy()#assign a copy. Otherwise values in both dicts are changed when manipulating one dict
+            self.fittingpopups.optimizer_settings = self.optimizer_settings.copy()#assign a copy. Otherwise values in both dicts are changed when manipulating one dict
 
 
             learning_rate_expo_on = False
@@ -3098,7 +2811,7 @@ class AIDeveloper(QtWidgets.QWidget):
             loss_expert = "categorical_crossentropy"
             optimizer_expert_on = False
             optimizer_expert = "Adam"
-            optimizer_settings = self.fittingpopups_ui[listindex].optimizer_settings.copy()#make a copy to make sure that changes in the UI are not immediately used
+            optimizer_settings = self.fittingpopups.optimizer_settings.copy()#make a copy to make sure that changes in the UI are not immediately used
 
             paddingMode = str(self.comboBox_paddingMode.currentText())#.lower()
 
@@ -3128,11 +2841,11 @@ class AIDeveloper(QtWidgets.QWidget):
                 print("Xtra data is used only for some files. Xtra data needs to be used either by all or by none!")
                 return
 
-            self.fittingpopups_ui[listindex].SelectedFiles = SelectedFiles #save to self. to make it accessible for popup showing loss weights
+            self.fittingpopups.SelectedFiles = SelectedFiles #save to self. to make it accessible for popup showing loss weights
             #Get the class weights. This function runs now the first time in the fitting routine.
             #It is possible that the user chose Custom weights and then changed the classes. Hence first check if
             #there is a weight for each class available.
-            class_weight = self.get_class_weight(self.fittingpopups_ui[listindex].SelectedFiles,lossW_expert,custom_check_classes=True)
+            class_weight = self.get_class_weight(self.fittingpopups.SelectedFiles,lossW_expert,custom_check_classes=True)
             if type(class_weight)==list:
                 #There has been a mismatch between the classes described in class_weight and the classes available in SelectedFiles!
                 lossW_expert = class_weight[0] #overwrite
@@ -3158,7 +2871,7 @@ class AIDeveloper(QtWidgets.QWidget):
             if collection==False:
                 #Create an excel file
                 writer = pd.ExcelWriter(new_modelname.split(".model")[0]+'_meta.xlsx', engine='openpyxl')
-                self.fittingpopups_ui[listindex].writer = writer
+                self.fittingpopups.writer = writer
                 #Used files go to a separate sheet on the MetaFile.xlsx
                 SelectedFiles_df = pd.DataFrame(SelectedFiles)
                 pd.DataFrame().to_excel(writer,sheet_name='UsedData') #initialize empty Sheet
@@ -3239,7 +2952,7 @@ class AIDeveloper(QtWidgets.QWidget):
                     aid_dl.model_compile(model_keras_p,loss_expert,optimizer_settings,learning_rate_const,model_metrics_t,nr_classes)
                     print("Recompiled parallel model to adjust learning rate, loss, optimizer")
 
-            self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text_updates)
+            self.fittingpopups.textBrowser_FittingInfo.append(text_updates)
 
             #self.model_keras = model_keras #overwrite the model on self
 
@@ -3385,7 +3098,7 @@ class AIDeveloper(QtWidgets.QWidget):
                 Para_dict["cycLrMin"]=cycLrMin,
                 Para_dict["cycLrMax"]=cycLrMax,
                 Para_dict["cycLrMethod"] = cycLrMethod,
-                Para_dict["clr_settings"] = self.fittingpopups_ui[listindex].clr_settings,
+                Para_dict["clr_settings"] = self.fittingpopups.clr_settings,
 
                 Para_dict["learning_rate_expo_on"]=learning_rate_expo_on,
                 Para_dict["expDecInitLr"]=expDecInitLr,
@@ -3418,14 +3131,14 @@ class AIDeveloper(QtWidgets.QWidget):
 
                 if collection==False:
                     if counter == 0:
-                        Para_dict.to_excel(self.fittingpopups_ui[listindex].writer,sheet_name='Parameters')
+                        Para_dict.to_excel(self.fittingpopups.writer,sheet_name='Parameters')
                     else:
-                        Para_dict.to_excel(self.fittingpopups_ui[listindex].writer,sheet_name='Parameters',startrow=self.fittingpopups_ui[listindex].writer.sheets['Parameters'].max_row,header= False)
+                        Para_dict.to_excel(self.fittingpopups.writer,sheet_name='Parameters',startrow=self.fittingpopups.writer.sheets['Parameters'].max_row,header= False)
 
                     if os.path.isfile(new_modelname.split(".model")[0]+'_meta.xlsx'):
                         os.chmod(new_modelname.split(".model")[0]+'_meta.xlsx', S_IREAD|S_IRGRP|S_IROTH|S_IWRITE|S_IWGRP|S_IWOTH)#change to read/write
                     try:
-                        self.fittingpopups_ui[listindex].writer.save()
+                        self.fittingpopups.writer.save()
                     except:
                         pass
                     os.chmod(new_modelname.split(".model")[0]+'_meta.xlsx', S_IREAD|S_IRGRP|S_IROTH)#change to only readable
@@ -3576,18 +3289,18 @@ class AIDeveloper(QtWidgets.QWidget):
 
 
             ####################Update the PopupFitting########################
-            self.fittingpopups_ui[listindex].spinBox_NrEpochs.setValue(nr_epochs)
+            self.fittingpopups.spinBox_NrEpochs.setValue(nr_epochs)
             chosen_model = str(self.comboBox_ModelSelection.currentText())
             #padding
-            index = self.fittingpopups_ui[listindex].comboBox_paddingMode_pop.findText(paddingMode, QtCore.Qt.MatchFixedString)
+            index = self.fittingpopups.comboBox_paddingMode_pop.findText(paddingMode, QtCore.Qt.MatchFixedString)
             if index >= 0:
-                self.fittingpopups_ui[listindex].comboBox_paddingMode_pop.setCurrentIndex(index)
+                self.fittingpopups.comboBox_paddingMode_pop.setCurrentIndex(index)
 
 
 
-            index = self.fittingpopups_ui[listindex].comboBox_paddingMode_pop.findText(paddingMode, QtCore.Qt.MatchFixedString)
+            index = self.fittingpopups.comboBox_paddingMode_pop.findText(paddingMode, QtCore.Qt.MatchFixedString)
             if index >= 0:
-                self.fittingpopups_ui[listindex].comboBox_paddingMode_pop.setCurrentIndex(index)
+                self.fittingpopups.comboBox_paddingMode_pop.setCurrentIndex(index)
 
             do_text = [str(do_i) for do_i in dropout_expert]
 
@@ -3629,7 +3342,7 @@ class AIDeveloper(QtWidgets.QWidget):
             t2 =  time.time() #Initialize a timer; this is used update the fitting parameters
             while counter < nr_epochs:#nr_epochs: #resample nr_epochs times
                 #Only keep fitting if the respective window is open:
-                isVisible = self.fittingpopups[listindex].isVisible()
+                isVisible = self.fittingpopups.isVisible()
                 if isVisible:
                     ############Keras image augmentation#####################
                     #Start the first iteration:
@@ -3761,41 +3474,41 @@ class AIDeveloper(QtWidgets.QWidget):
 # =============================================================================
                             verbose = 0
 
-                            if self.fittingpopups_ui[listindex].checkBox_ApplyNextEpoch.isChecked():
-                                nr_epochs = int(self.fittingpopups_ui[listindex].spinBox_NrEpochs.value())
+                            if self.fittingpopups.checkBox_ApplyNextEpoch.isChecked():
+                                nr_epochs = int(self.fittingpopups.spinBox_NrEpochs.value())
 
-                                #brightness_mult_lower = float(self.fittingpopups_ui[listindex].doubleSpinBox_MultLower_pop.value())
-                                #gaussnoise_mean = float(self.fittingpopups_ui[listindex].doubleSpinBox_GaussianNoiseMean_pop.value())
-                                #gaussnoise_scale = float(self.fittingpopups_ui[listindex].doubleSpinBox_GaussianNoiseScale_pop.value())
+                                #brightness_mult_lower = float(self.fittingpopups.doubleSpinBox_MultLower_pop.value())
+                                #gaussnoise_mean = float(self.fittingpopups.doubleSpinBox_GaussianNoiseMean_pop.value())
+                                #gaussnoise_scale = float(self.fittingpopups.doubleSpinBox_GaussianNoiseScale_pop.value())
 
-                                #contrast_on = bool(self.fittingpopups_ui[listindex].checkBox_contrast_pop.isChecked())
-                                #contrast_lower = float(self.fittingpopups_ui[listindex].doubleSpinBox_contrastLower_pop.value())
-                                #contrast_higher = float(self.fittingpopups_ui[listindex].doubleSpinBox_contrastHigher_pop.value())
-                                #saturation_on = bool(self.fittingpopups_ui[listindex].checkBox_saturation_pop.isChecked())
-                                #saturation_lower = float(self.fittingpopups_ui[listindex].doubleSpinBox_saturationLower_pop.value())
-                                #saturation_higher = float(self.fittingpopups_ui[listindex].doubleSpinBox_saturationHigher_pop.value())
-                                #hue_on = bool(self.fittingpopups_ui[listindex].checkBox_hue_pop.isChecked())
-                                #hue_delta = float(self.fittingpopups_ui[listindex].doubleSpinBox_hueDelta_pop.value())
-
-
+                                #contrast_on = bool(self.fittingpopups.checkBox_contrast_pop.isChecked())
+                                #contrast_lower = float(self.fittingpopups.doubleSpinBox_contrastLower_pop.value())
+                                #contrast_higher = float(self.fittingpopups.doubleSpinBox_contrastHigher_pop.value())
+                                #saturation_on = bool(self.fittingpopups.checkBox_saturation_pop.isChecked())
+                                #saturation_lower = float(self.fittingpopups.doubleSpinBox_saturationLower_pop.value())
+                                #saturation_higher = float(self.fittingpopups.doubleSpinBox_saturationHigher_pop.value())
+                                #hue_on = bool(self.fittingpopups.checkBox_hue_pop.isChecked())
+                                #hue_delta = float(self.fittingpopups.doubleSpinBox_hueDelta_pop.value())
 
 
-                                #motionBlur_kernel = str(self.fittingpopups_ui[listindex].lineEdit_motionBlurKernel_pop.text())
-                                #motionBlur_angle = str(self.fittingpopups_ui[listindex].lineEdit_motionBlurAngle_pop.text())
+
+
+                                #motionBlur_kernel = str(self.fittingpopups.lineEdit_motionBlurKernel_pop.text())
+                                #motionBlur_angle = str(self.fittingpopups.lineEdit_motionBlurAngle_pop.text())
 
                                 #motionBlur_kernel = tuple(ast.literal_eval(motionBlur_kernel)) #translate string in the lineEdits to a tuple
                                 #motionBlur_angle = tuple(ast.literal_eval(motionBlur_angle)) #translate string in the lineEdits to a tuple
 
                                 #Expert mode stuff
                                 expert_mode = False
-                                #epochs_expert = int(self.fittingpopups_ui[listindex].spinBox_epochs.value())
+                                #epochs_expert = int(self.fittingpopups.spinBox_epochs.value())
 
 
 
                                 cycLrMin = []
                                 cycLrMax = []
-                                #cycLrMethod = str(self.fittingpopups_ui[listindex].comboBox_cycLrMethod.currentText())
-                                clr_settings = self.fittingpopups_ui[listindex].clr_settings.copy() #Get a copy of the current optimizer_settings. .copy prevents that changes in the UI have immediate effect
+                                #cycLrMethod = str(self.fittingpopups.comboBox_cycLrMethod.currentText())
+                                clr_settings = self.fittingpopups.clr_settings.copy() #Get a copy of the current optimizer_settings. .copy prevents that changes in the UI have immediate effect
                                 cycLrStepSize = aid_dl.get_cyclStepSize(SelectedFiles,clr_settings["step_size"],batchSize_expert)
                                 cycLrGamma = clr_settings["gamma"]
 
@@ -3803,9 +3516,9 @@ class AIDeveloper(QtWidgets.QWidget):
 
 
 
-                                #loss_expert = str(self.fittingpopups_ui[listindex].comboBox_expt_loss_pop.currentText())
-                                optimizer_settings = self.fittingpopups_ui[listindex].optimizer_settings.copy() #Get a copy of the current optimizer_settings. .copy prevents that changes in the UI have immediate effect
-                                paddingMode_ = str(self.fittingpopups_ui[listindex].comboBox_paddingMode_pop.currentText())
+                                #loss_expert = str(self.fittingpopups.comboBox_expt_loss_pop.currentText())
+                                optimizer_settings = self.fittingpopups.optimizer_settings.copy() #Get a copy of the current optimizer_settings. .copy prevents that changes in the UI have immediate effect
+                                paddingMode_ = str(self.fittingpopups.comboBox_paddingMode_pop.currentText())
                                 print("paddingMode_:"+str(paddingMode_))
                                 if paddingMode_ != paddingMode:
                                     print("Changed the padding mode!")
@@ -3817,8 +3530,8 @@ class AIDeveloper(QtWidgets.QWidget):
                                     dropout_expert = ast.literal_eval(dropout_expert)
                                 except:
                                     dropout_expert = []
-                                #lossW_expert = str(self.fittingpopups_ui[listindex].lineEdit_lossW.text())
-                                class_weight = self.get_class_weight(self.fittingpopups_ui[listindex].SelectedFiles,lossW_expert) #
+                                #lossW_expert = str(self.fittingpopups.lineEdit_lossW.text())
+                                class_weight = self.get_class_weight(self.fittingpopups.SelectedFiles,lossW_expert) #
 
                                 print("Updating parameter file (meta.xlsx)!")
                                 update_para_dict()
@@ -3879,10 +3592,10 @@ class AIDeveloper(QtWidgets.QWidget):
                                         model_metrics_t = aid_dl.get_metrics_tensors(self.get_metrics(),nr_classes)
                                         aid_dl.model_compile(m,loss_expert,optimizer_settings,learning_rate_const,model_metrics_t,nr_classes)
 
-                                self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text_updates)
+                                self.fittingpopups.textBrowser_FittingInfo.append(text_updates)
 
                                 #self.model_keras = model_keras #overwrite the model in self
-                                self.fittingpopups_ui[listindex].checkBox_ApplyNextEpoch.setChecked(False)
+                                self.fittingpopups.checkBox_ApplyNextEpoch.setChecked(False)
 
 
                             ##########Contrast/Saturation/Hue augmentation#########
@@ -3943,7 +3656,7 @@ class AIDeveloper(QtWidgets.QWidget):
                                 print("Time to apply normalization="+str(t4-t3))
 
                             #Fitting can be paused
-                            while str(self.fittingpopups_ui[listindex].pushButton_Pause_pop.text())==" ":
+                            while str(self.fittingpopups.pushButton_Pause_pop.text())==" ":
                                 time.sleep(1) #wait 1 seconds and then check the text on the button again
 
                             if verbose == 1:
@@ -3993,7 +3706,7 @@ class AIDeveloper(QtWidgets.QWidget):
                                             model_metrics_records[key] = value
                                             record_broken = True
                                             print(key+" broke record -> Model will be saved")
-                                                #self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                                #self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                 if record_broken:#if any record was broken...
 # =============================================================================
@@ -4003,26 +3716,26 @@ class AIDeveloper(QtWidgets.QWidget):
 # =============================================================================
                                     #Save the model
                                     text = "Save model to following directory: \n"+os.path.dirname(new_modelname)
-                                    print(text)
+                                    #print(text)
 
                                     if os.path.exists(os.path.dirname(new_modelname)):
                                         model_keras.save(new_modelname.split(".model")[0]+"_"+str(counter)+".model",save_format='h5')
                                         text = "Record was broken -> saved model"
-                                        print(text)
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        #print(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                     else:#in case the folder does not exist (anymore), create a folder in temp
                                         #what is the foldername of the model?
                                         text = "Saving failed. Create folder in temp"
                                         print(text)
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                         saving_failed = True
                                         temp_path = aid_bin.create_temp_folder()#create a temp folder if it does not already exist
 
                                         text = "Your temp. folder is here: "+str(temp_path)
                                         print(text)
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                         parentfolder = aid_bin.splitall(new_modelname)[-2]
                                         fname = os.path.split(new_modelname)[-1]
@@ -4031,7 +3744,7 @@ class AIDeveloper(QtWidgets.QWidget):
                                         if not os.path.exists(os.path.join(temp_path,parentfolder)):
                                             text = "Create folder in temp:\n"+os.path.join(temp_path,parentfolder)
                                             print(text)
-                                            self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                            self.fittingpopups.textBrowser_FittingInfo.append(text)
                                             os.mkdir(os.path.join(temp_path,parentfolder))
 
                                         #change the new_modelname to a path in temp
@@ -4040,19 +3753,19 @@ class AIDeveloper(QtWidgets.QWidget):
                                         #inform user!
                                         text = "Could not find original folder. Files are now saved to "+new_modelname
                                         text = "<span style=\' color: red;\'>" +text+"</span>"
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
                                         text = "<span style=\' color: black;\'>" +""+"</span>"
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                         #Save the  model
                                         model_keras.save(new_modelname.split(".model")[0]+"_"+str(counter)+".model",save_format='h5')
                                         text = "Model saved successfully to temp"
                                         print(text)
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                         #Also update the excel writer!
                                         writer = pd.ExcelWriter(new_modelname.split(".model")[0]+'_meta.xlsx', engine='openpyxl')
-                                        self.fittingpopups_ui[listindex].writer = writer
+                                        self.fittingpopups.writer = writer
                                         pd.DataFrame().to_excel(writer,sheet_name='UsedData') #initialize empty Sheet
                                         SelectedFiles_df.to_excel(writer,sheet_name='UsedData')
                                         DataOverview_df.to_excel(writer,sheet_name='DataOverview') #write data overview to separate sheet
@@ -4062,13 +3775,13 @@ class AIDeveloper(QtWidgets.QWidget):
                                     Saved.append(1)
 
                                 #Also save the model upon user-request
-                                elif bool(self.fittingpopups_ui[listindex].checkBox_saveEpoch_pop.isChecked())==True:
+                                elif bool(self.fittingpopups.checkBox_saveEpoch_pop.isChecked())==True:
                                     if deviceSelected=="Multi-GPU":#in case of Multi-GPU...
                                         #In case of multi-GPU, first copy the weights of the parallel model to the normal model
                                         model_keras.set_weights(model_keras_p.layers[-2].get_weights())
                                     model_keras.save(new_modelname.split(".model")[0]+"_"+str(counter)+".model",save_format='h5')
                                     Saved.append(1)
-                                    self.fittingpopups_ui[listindex].checkBox_saveEpoch_pop.setChecked(False)
+                                    self.fittingpopups.checkBox_saveEpoch_pop.setChecked(False)
                                 else:
                                     Saved.append(0)
 
@@ -4095,7 +3808,7 @@ class AIDeveloper(QtWidgets.QWidget):
                                                 record_broken = True
                                                 text = key+" broke record -> Model will be saved"
                                                 print(text)
-                                                self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                                self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                                 #one could 'break' here, but I want to update all records
                                         elif 'val_loss' in key:
@@ -4105,17 +3818,17 @@ class AIDeveloper(QtWidgets.QWidget):
                                                 record_broken = True
                                                 text = key+" broke record -> Model will be saved"
                                                 print(text)
-                                                self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                                self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                     #For collections of models:
                                     if record_broken:
                                         #Save the model
                                         model_keras[i].save(model_keras_path[i].split(".model")[0]+"_"+str(counter)+".model")
                                         SAVED[i].append(1)
-                                    elif bool(self.fittingpopups_ui[listindex].checkBox_saveEpoch_pop.isChecked())==True:
+                                    elif bool(self.fittingpopups.checkBox_saveEpoch_pop.isChecked())==True:
                                         model_keras[i].save(model_keras_path[i].split(".model")[0]+"_"+str(counter)+".model")
                                         SAVED[i].append(1)
-                                        self.fittingpopups_ui[listindex].checkBox_saveEpoch_pop.setChecked(False)
+                                        self.fittingpopups.checkBox_saveEpoch_pop.setChecked(False)
                                     else:
                                         SAVED[i].append(0)
 
@@ -4148,16 +3861,16 @@ class AIDeveloper(QtWidgets.QWidget):
                                     writer.save()
                                     os.chmod(new_modelname.split(".model")[0]+'_meta.xlsx', S_IREAD|S_IRGRP|S_IROTH)
 
-                                    meta_saving_t = int(self.fittingpopups_ui[listindex].spinBox_saveMetaEvery.value())
+                                    meta_saving_t = int(self.fittingpopups.spinBox_saveMetaEvery.value())
                                     text = "meta.xlsx was saved (automatic saving every "+str(meta_saving_t)+"s)"
                                     print(text)
-                                    self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                    self.fittingpopups.textBrowser_FittingInfo.append(text)
 
-                                    #self.fittingpopups_ui[listindex].backup.append({"DF1":DF1})
+                                    #self.fittingpopups.backup.append({"DF1":DF1})
                                     Index,Histories,Saved,Stopwatch,LearningRate = [],[],[],[],[]#reset the lists
 
                                 #Get a sensible frequency for saving the dataframe (every 20s)
-                                elif t2-t1>int(self.fittingpopups_ui[listindex].spinBox_saveMetaEvery.value()):
+                                elif t2-t1>int(self.fittingpopups.spinBox_saveMetaEvery.value()):
                                 #elif counter%50==0:  #otherwise save the history to excel after each n epochs
                                     DF1 = [[ h[h_i][-1] for h_i in h] for h in Histories] #if nb_epoch in .fit() is >1, only save the last history item, beacuse this would a model that could be saved
                                     DF1 = np.r_[DF1]
@@ -4175,10 +3888,10 @@ class AIDeveloper(QtWidgets.QWidget):
                                         writer.save()
                                         os.chmod(new_modelname.split(".model")[0]+'_meta.xlsx', S_IREAD|S_IRGRP|S_IROTH)  #make read only
 
-                                        meta_saving_t = int(self.fittingpopups_ui[listindex].spinBox_saveMetaEvery.value())
+                                        meta_saving_t = int(self.fittingpopups.spinBox_saveMetaEvery.value())
                                         text = "meta.xlsx was saved (automatic saving every "+str(meta_saving_t)+"s to directory:\n)"+new_modelname
                                         print(text)
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
                                         Index,Histories,Saved,Stopwatch,LearningRate = [],[],[],[],[]#reset the lists
                                         t1 = time.time()
@@ -4202,14 +3915,14 @@ class AIDeveloper(QtWidgets.QWidget):
                                         #inform user!
                                         text = "Could not find original folder. Files are now saved to "+new_modelname
                                         text = "<span style=\' color: red;\'>" +text+"</span>"#put red text to the infobox
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
                                         text = "<span style=\' color: black;\'>" +""+"</span>"#reset textcolor to black
-                                        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                                        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
 
                                         #update the excel writer
                                         writer = pd.ExcelWriter(new_modelname.split(".model")[0]+'_meta.xlsx', engine='openpyxl')
-                                        self.fittingpopups_ui[listindex].writer = writer
+                                        self.fittingpopups.writer = writer
                                         pd.DataFrame().to_excel(writer,sheet_name='UsedData') #initialize empty Sheet
                                         SelectedFiles_df.to_excel(writer,sheet_name='UsedData')
                                         DataOverview_df.to_excel(writer,sheet_name='DataOverview') #write data overview to separate sheet
@@ -4249,7 +3962,7 @@ class AIDeveloper(QtWidgets.QWidget):
                                     Index = []#reset the Index list
 
                                 #Get a sensible frequency for saving the dataframe (every 20s)
-                                elif t2-t1>int(self.fittingpopups_ui[listindex].spinBox_saveMetaEvery.value()):
+                                elif t2-t1>int(self.fittingpopups.spinBox_saveMetaEvery.value()):
                                     for i in range(len(HISTORIES)):
                                         Histories = HISTORIES[i]
                                         Saved = SAVED[i]
@@ -4288,10 +4001,10 @@ class AIDeveloper(QtWidgets.QWidget):
 # =============================================================================
 
                 text = "<span style=\' font-weight:600; color: red;\'>" +text+"</span>"#put red text to the infobox
-                self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+                self.fittingpopups.textBrowser_FittingInfo.append(text)
                 print('\a')#make a noise
-                self.fittingpopups_ui[listindex].textBrowser_FittingInfo.setStyleSheet("background-color: yellow;")
-                self.fittingpopups_ui[listindex].textBrowser_FittingInfo.moveCursor(QtGui.QTextCursor.End)
+                self.fittingpopups.textBrowser_FittingInfo.setStyleSheet("background-color: yellow;")
+                self.fittingpopups.textBrowser_FittingInfo.moveCursor(QtGui.QTextCursor.End)
 
             if collection==False:
                 if len(Histories)>0: #if the list for History files is not empty, process it!
@@ -4349,32 +4062,32 @@ class AIDeveloper(QtWidgets.QWidget):
 
 
     def update_historyplot_pop(self,listindex):
-        #listindex = self.popupcounter-1 #len(self.fittingpopups_ui)-1
+        #listindex = self.popupcounter-1 #len(self.fittingpopups)-1
         #After the first epoch there are checkboxes available. Check, if user checked some:
-        colcount = int(self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.columnCount())
+        colcount = int(self.fittingpopups.tableWidget_HistoryInfo_pop.columnCount())
         #Collect items that are checked
         selected_items,Colors = [],[]
         for colposition in range(colcount):
             #is it checked for train?
-            cb = self.fittingpopups_ui[listindex].tableWidget_HistoryInfo_pop.item(0, colposition)
+            cb = self.fittingpopups.tableWidget_HistoryInfo_pop.item(0, colposition)
             if not cb==None:
                 if cb.checkState() == QtCore.Qt.Checked:
                     selected_items.append(str(cb.text()))
                     Colors.append(cb.background())
         self.Colors = Colors
-        Histories = self.fittingpopups_ui[listindex].Histories
+        Histories = self.fittingpopups.Histories
         DF1 = [[ h[h_i][-1] for h_i in h] for h in Histories] #if nb_epoch in .fit() is >1, only save the last history item, beacuse this would a model that could be saved
         DF1 = np.r_[DF1]
         DF1 = pd.DataFrame( DF1,columns=Histories[0].keys() )
-        self.fittingpopups_ui[listindex].widget_pop.clear()
+        self.fittingpopups.widget_pop.clear()
 
         #Create fresh plot
-        plt1 = self.fittingpopups_ui[listindex].widget_pop.addPlot()
+        plt1 = self.fittingpopups.widget_pop.addPlot()
         plt1.showGrid(x=True,y=True)
         plt1.addLegend()
         plt1.setLabel('bottom', 'Epoch', units='')
         #Create a dict that stores plots for each metric (for real time plotting)
-        self.fittingpopups_ui[listindex].historyscatters = dict()
+        self.fittingpopups.historyscatters = dict()
         for i in range(len(selected_items)):
             key = selected_items[i]
             df = DF1[key]
@@ -4389,7 +4102,7 @@ class AIDeveloper(QtWidgets.QWidget):
             brush = pg.mkBrush(color=pencolor)
 
             historyscatter = plt1.plot(range(len(df)), df.values, pen=None,symbol='o',symbolPen=None,symbolBrush=brush,name=key,clear=False)
-            self.fittingpopups_ui[listindex].historyscatters[key]=historyscatter
+            self.fittingpopups.historyscatters[key]=historyscatter
 
 
     def actionDataToRamNow_function(self):
@@ -4492,31 +4205,31 @@ class AIDeveloper(QtWidgets.QWidget):
 # =============================================================================
     def pause_fitting_pop(self,listindex):
         #Just change the text on the button
-        if str(self.fittingpopups_ui[listindex].pushButton_Pause_pop.text())=="":
+        if str(self.fittingpopups.pushButton_Pause_pop.text())=="":
             #If the the text on the button was Pause, change it to Continue
-            self.fittingpopups_ui[listindex].pushButton_Pause_pop.setText(" ")
-            self.fittingpopups_ui[listindex].pushButton_Pause_pop.setStyleSheet("background-color: green")
-            self.fittingpopups_ui[listindex].pushButton_Pause_pop.setIcon(QtGui.QIcon(os.path.join(dir_root, "art","Icon","continue.png")))
+            self.fittingpopups.pushButton_Pause_pop.setText(" ")
+            self.fittingpopups.pushButton_Pause_pop.setStyleSheet("background-color: green")
+            self.fittingpopups.pushButton_Pause_pop.setIcon(QtGui.QIcon(os.path.join(dir_root, "art","Icon","continue.png")))
 
-        elif str(self.fittingpopups_ui[listindex].pushButton_Pause_pop.text())==" ":
+        elif str(self.fittingpopups.pushButton_Pause_pop.text())==" ":
             #If the the text on the button was Continue, change it to Pause
-            self.fittingpopups_ui[listindex].pushButton_Pause_pop.setText("")
-            self.fittingpopups_ui[listindex].pushButton_Pause_pop.setIcon(QtGui.QIcon(os.path.join(dir_root, "art","Icon","pause.png")))
-            self.fittingpopups_ui[listindex].pushButton_Pause_pop.setStyleSheet("")
+            self.fittingpopups.pushButton_Pause_pop.setText("")
+            self.fittingpopups.pushButton_Pause_pop.setIcon(QtGui.QIcon(os.path.join(dir_root, "art","Icon","pause.png")))
+            self.fittingpopups.pushButton_Pause_pop.setStyleSheet("")
 
 
     def stop_fitting_pop(self,listindex):
-        #listindex = len(self.fittingpopups_ui)-1
-        epochs = self.fittingpopups_ui[listindex].epoch_counter
+        #listindex = len(self.fittingpopups)-1
+        epochs = self.fittingpopups.epoch_counter
         #Stop button on the fititng popup
         #Should stop the fitting process and save the metafile
         #1. Change the nr. requested epochs to a smaller number
-        self.fittingpopups_ui[listindex].spinBox_NrEpochs.setValue(epochs-1)
+        self.fittingpopups.spinBox_NrEpochs.setValue(epochs-1)
         #2. Check the box which will cause that the new parameters are applied at next epoch
-        self.fittingpopups_ui[listindex].checkBox_ApplyNextEpoch.setChecked(True)
+        self.fittingpopups.checkBox_ApplyNextEpoch.setChecked(True)
 
     def clearTextWindow_pop(self,listindex):
-        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.clear()
+        self.fittingpopups.textBrowser_FittingInfo.clear()
 
     def showModelSumm_pop(self,listindex):
         text5 = "Model summary:\n"
@@ -4524,7 +4237,7 @@ class AIDeveloper(QtWidgets.QWidget):
         self.model_keras.summary(print_fn=summary.append)
         summary = "\n".join(summary)
         text = text5+summary
-        self.fittingpopups_ui[listindex].textBrowser_FittingInfo.append(text)
+        self.fittingpopups.textBrowser_FittingInfo.append(text)
 
     def saveModelSumm_pop(self,listindex):
         text5 = "Model summary:\n"
@@ -4542,7 +4255,7 @@ class AIDeveloper(QtWidgets.QWidget):
 
     def saveTextWindow_pop(self,listindex):
         #Get the entire content of textBrowser_FittingInfo
-        text = str(self.fittingpopups_ui[listindex].textBrowser_FittingInfo.toPlainText())
+        text = str(self.fittingpopups.textBrowser_FittingInfo.toPlainText())
         #Ask the user where to save the stuff
         filename = QtWidgets.QFileDialog.getSaveFileName(self, 'Fitting info', Default_dict["Path of last model"]," (*.txt)")
         filename = filename[0]

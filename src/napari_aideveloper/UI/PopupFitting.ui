@@ -776,6 +776,9 @@ QHeaderView::section {
           <property name="text">
            <string>Real time plotting</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>

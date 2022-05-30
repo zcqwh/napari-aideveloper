@@ -169,6 +169,9 @@
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Valid .rtdc files have to contain at least 'images', 'pos_x' and 'pos_y'. &lt;br/&gt;After dropping data, you can specify the ‘Class’ of the images and if it should be used for training (T) or validation (V).&lt;br/&gt;Double-click on the filename to show a random image of the data set. The original and cropped (using 'Input image size') image is shown.&lt;br/&gt;Click on the button 'Plot' to open a popup where you can get a histogram or scatterplot of enclosed data.&lt;br/&gt;'Cells/Epoch' defines the nr. of images that are used in each epoch for training. Random images are drawn in each epoch during training. For the validation set, images are drawn once at the beginning and kept constant.&lt;br/&gt;Deactivate 'Shuffle' if you don't want to use random data. Then all images of this file are used.&lt;br/&gt;Zoom allows you to increase or decrease resolution. Zoom=1 does nothing; Zoom=2 zooms in; Zoom=0.5 zooms out. This is useful if you have data acquired at 40x but you want to use it to train a model for 20x data. Use 'Options'-&amp;gt;'Zooming order' to define the method used for zooming.&lt;br/&gt;Hint for RT-DC users: Use ShapeOut to gate for particular subpopulations and save the filtered data as .rtdc. Make sure to export at least 'images', 'pos_x' and 'pos_y'.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
+                 <property name="textElideMode">
+                  <enum>Qt::ElideLeft</enum>
+                 </property>
                  <attribute name="horizontalHeaderVisible">
                   <bool>true</bool>
                  </attribute>
@@ -1508,7 +1511,7 @@ QComboBox:drop-down {width:20px; }
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>317</width>
+                        <width>424</width>
                         <height>802</height>
                        </rect>
                       </property>
