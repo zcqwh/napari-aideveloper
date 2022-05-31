@@ -7,7 +7,7 @@ see: https://napari.org/plugins/guides.html?#widgets
 Replace code below according to your needs.
 """
 import ast
-import copy
+import copy,shutil
 import json
 import os
 import platform
@@ -289,7 +289,31 @@ class AIDeveloper(QtWidgets.QWidget):
         self.radioButton_LoadContinueModel.clicked.connect(self.action_preview_model)
         self.pushButton_modelname.clicked.connect(self.action_set_modelpath_and_name)
         self.pushButton_FitModel.clicked.connect(lambda: self.action_initialize_model(duties="initialize_train"))
+        
+        ####### History tab ######
+        self.pushButton_LoadHistory.clicked.connect(self.action_load_history)
+        self.pushButton_Live.clicked.connect(self.action_load_history_current)
+        self.pushButton_UpdateHistoryPlot.clicked.connect(self.update_historyplot)
+        self.pushButton_LoadModel.clicked.connect(self.history_tab_get_model_path)
+        self.pushButton_convertModel.clicked.connect(self.history_tab_convertModel)
+        
+        self.tableWidget_HistoryItems.doubleClicked.connect(self.tableWidget_HistoryItems_dclick)
+        conversion_methods_source = ["Keras TensorFlow", "Frozen TensorFlow .pb"]
+        #conversion_methods_target = [".nnet","Frozen TensorFlow .pb", "Optimized TensorFlow .pb", "ONNX (via tf2onnx)", "ONNX (via MMdnn)","CoreML", "PyTorch Script","Caffe Script","CNTK Script","MXNet Script","ONNX Script","TensorFlow Script","Keras Script"]
+        conversion_methods_target = [".nnet","Frozen TensorFlow .pb", "ONNX (via tf2onnx)", "ONNX (via MMdnn)","CoreML", "PyTorch Script","Caffe Script","CNTK Script","MXNet Script","ONNX Script","TensorFlow Script","Keras Script"]
+        conversion_methods_target = [".nnet","Frozen TensorFlow .pb", "ONNX (via tf2onnx)"]#drop many conversion method for now. Wait until mmdnn and coremltools get updated 
 
+        self.comboBox_convertTo.addItems(conversion_methods_target)
+        width=self.comboBox_convertTo.fontMetrics().boundingRect(max(conversion_methods_target, key=len)).width()
+        self.comboBox_convertTo.view().setFixedWidth(width+10)
+        self.combobox_initial_format.setCurrentIndex(0)             
+        #self.comboBox_convertTo.setEnabled(False)
+        
+        self.combobox_initial_format.addItems(conversion_methods_source)
+        width=self.combobox_initial_format.fontMetrics().boundingRect(max(conversion_methods_source, key=len)).width()
+        self.combobox_initial_format.view().setFixedWidth(width+10)             
+        self.combobox_initial_format.setCurrentIndex(0)             
+        #self.combobox_initial_format.setEnabled(False)
 
         ############################Variables##################################
         #######################################################################
@@ -408,21 +432,60 @@ class AIDeveloper(QtWidgets.QWidget):
             
 
             columnPosition = 2 #Class
-            comboBox = QtWidgets.QComboBox(self.table_dragdrop)
-            class_items =["0","1","2","3","4","5","6","7","8","9"]
-            comboBox.addItems(class_items)
-            comboBox.setStyleSheet("QComboBox {"
-                                   "combobox-popup: 0;}"
-
-                                    "QComboBox:drop-down {"
-                                    "width:20px; "
-                                    "subcontrol-position: right center; "  # position
-                                    "subcontrol-origin: padding;}\n"  # alignment
+            ######  comboxBox version  #####
+# =============================================================================
+#             comboBox = QtWidgets.QComboBox(self.table_dragdrop)
+#             class_items =["0","1","2","3","4","5","6","7","8","9"]
+#             comboBox.addItems(class_items)
+#             comboBox.setStyleSheet("QComboBox {"
+#                                    "combobox-popup: 0;}"
+# 
+#                                     "QComboBox:drop-down {"
+#                                     "width:20px; "
+#                                     "subcontrol-position: right center; "  # position
+#                                     "subcontrol-origin: padding;}\n"  # alignment
+#                                     )
+#             comboBox.currentIndexChanged.connect(self.dataOverviewOn)
+#             self.table_dragdrop.setCellWidget(rowPosition, columnPosition, comboBox)
+# =============================================================================
+            ####### spinbox version ######
+            spinBox = QtWidgets.QSpinBox(self.table_dragdrop)
+            spinBox.valueChanged.connect(self.dataOverviewOn)
+            spinBox.setStyleSheet("QSpinBox {"
+                                  "  padding: 0px 0px;"
+                                  "  padding-right: 12px;"
+                                  "  padding-left: 3px;"
+                                  "  min-width: 25px;"
+                                  "  max-width: 29px;"
+                                  "}"
+                                  
+                                    "QSpinBox::up-button {"
+                                    "  subcontrol-position: top right;"
+                                    "  top: 2px;"
+                                    "  right: 2px;"
+                                    "  width: 10px;"
+                                    "  height: 13px;"
+                                    "}"
+                                    
+                                    "QSpinBox::down-button {"
+                                    "  subcontrol-position: bottom right;"
+                                    "  bottom: 2px;"
+                                    "  right: 2px;"
+                                    "  width: 10px;"
+                                    "  height: 13px;"
+                                    "}"
+                                    
+                                    "QSpinBox::up-arrow,"
+                                    "QSpinBox::down-arrow {"
+                                    "   width: 10px;"
+                                    "   height: 10px;"
+                                    "}"
                                     )
-
-            comboBox.currentIndexChanged.connect(self.dataOverviewOn)
-            self.table_dragdrop.setCellWidget(rowPosition, columnPosition, comboBox)
-
+            
+            
+            self.table_dragdrop.setCellWidget(rowPosition, columnPosition, spinBox)
+            
+            
             for columnPosition in [3,4]: #T/V
                 #for each item, also create 2 checkboxes (train/valid)
                 item = QtWidgets.QTableWidgetItem()#("item {0} {1}".format(rowNumber, columnNumber))
@@ -531,7 +594,8 @@ class AIDeveloper(QtWidgets.QWidget):
             #get the filename/path
             rtdc_path = str(self.table_dragdrop.item(rowPosition, 1).text())
             #get the index (celltype) of it
-            index = int(self.table_dragdrop.cellWidget(rowPosition, 2).currentText())
+            index = int(self.table_dragdrop.cellWidget(rowPosition, 2).value())
+            
             #How many Events contains dataset in total?
             nr_events = int(self.table_dragdrop.item(rowPosition, 6).text())
             #how many cells/epoch during training or validation?
@@ -855,7 +919,7 @@ class AIDeveloper(QtWidgets.QWidget):
             #get the filename/path
             rtdc_path = str(self.table_dragdrop.item(rowPosition, 1).text())
             #get the index (celltype) of it
-            index = int(self.table_dragdrop.cellWidget(rowPosition, 2).currentIndex())
+            index = int(self.table_dragdrop.cellWidget(rowPosition, 2).value())
             #is it checked for train?
             cb_t = self.table_dragdrop.item(rowPosition, 3)
             #How many Events contains dataset in total?
@@ -4264,7 +4328,605 @@ class AIDeveloper(QtWidgets.QWidget):
             f = open(filename,'w')
             f.write(text)
             f.close()
+    
+# =============================================================================
+# History tab
+# =============================================================================
+    def action_load_history(self):
+        filename = QtWidgets.QFileDialog.getOpenFileName(self, 'Open meta-data', Default_dict["Path of last model"],"AIDeveloper Meta file (*meta.xlsx)")
+        filename = filename[0]
+        if not filename.endswith("meta.xlsx"):
+            return
+        if not os.path.isfile(filename):
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("File not found")
+            msg.setWindowTitle("File not found")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+        self.lineEdit_LoadHistory.setText(filename)
+        self.action_plot_history(filename)
+
+    def action_load_history_current(self):
+        if self.model_keras_path==None:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("There is no fitting going on")
+            msg.setWindowTitle("No current fitting process!")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+            
+        history_path = self.model_keras_path
+        if type(history_path)==list:#collection=True
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("Not implemented for collections. Please use 'Load History' button to specify a single .meta file")
+            msg.setWindowTitle("Not implemented for collecitons")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+
+        filename = history_path.split("_0.model")[0]+"_meta.xlsx"
+        
+        if not filename.endswith("meta.xlsx"):
+            return
+        if not os.path.isfile(filename):
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("File not found")
+            msg.setWindowTitle("File not found")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+        self.lineEdit_LoadHistory.setText(filename)
+        self.action_plot_history(filename)
+
+
+    def action_plot_history(self,filename):
+        #If there is a file, it can happen that fitting is currently going on
+        #and with bad luck AID just tries to write to the file. This would cause a crash.
+        #Therfore, first try to copy the file to a temporary folder. If that fails,
+        #wait 1 seconds and try again
+        
+        #There needs to be a "temp" folder. If there os none, create it!
+        #does temp exist?
+        tries = 0 #during fitting, AID sometimes wants to write to the history file. In this case we cant read
+        try:
+            while tries<15:#try a few times
+                try:
+                    temp_path = aid_bin.create_temp_folder()#create a temp folder if it does not already exist
+                    #Create a  random filename for a temp. file
+                    someletters = list("STERNBURGPILS")
+                    temporaryfile = np.random.choice(someletters,5,replace=True)
+                    temporaryfile = "".join(temporaryfile)+".xlsx"
+                    temporaryfile = os.path.join(temp_path,temporaryfile)
+                    shutil.copyfile(filename,temporaryfile) #copy the original excel file there
+                    dic = pd.read_excel(temporaryfile,sheet_name='History',index_col=0,engine="openpyxl") #open it there
+                    self.loaded_history = dic
+                    para = pd.read_excel(temporaryfile,sheet_name='Parameters',engine="openpyxl")
+                    print(temporaryfile)
+                    #delete the tempfile
+                    os.remove(temporaryfile)
+                    self.loaded_para = para    
+                    tries = 16
+                except:
+                    time.sleep(1.5)
+                    tries+=1
+
+        except Exception as e:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)       
+            msg.setText(str(e))
+            msg.setWindowTitle("Error")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+            
+        #Check if dic exists now
+        try:
+            keys = list(dic.keys())
+        except Exception as e:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)       
+            msg.setText(str(e))
+            msg.setWindowTitle("Error")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+        #Remember the path for next time
+        Default_dict["Path of last model"] = os.path.split(filename)[0]
+        aid_bin.save_aid_settings(Default_dict)
+        
+        #sort the list alphabetically
+        keys_ = [l.lower() for l in keys]
+        ind_sort = np.argsort(keys_)
+        keys = list(np.array(keys)[ind_sort])
+
+        #First keys should always be acc,loss,val_acc,val_loss -in this order
+        keys_first = ["accuracy","loss","val_accuracy","val_loss"]
+        for i in range(len(keys_first)):
+            if keys_first[i] in keys:
+                ind = np.where(np.array(keys)==keys_first[i])[0][0]
+                if ind!=i:
+                    del keys[ind]
+                    keys.insert(i,keys_first[i])
+        #Lastly check if there is "Saved" or "Time" present and shift it to the back
+        keys_last = ["Saved","Time"]
+        for i in range(len(keys_last)):
+            if keys_last[i] in keys:
+                ind = np.where(np.array(keys)==keys_last[i])[0][0]
+                if ind!=len(keys):
+                    del keys[ind]
+                    keys.append(keys_last[i])
+
+
+        
+        self.tableWidget_HistoryItems.setColumnCount(len(keys)+1) #+1 because of "Show saved only"
+        #for each key, put a checkbox on the tableWidget_HistoryInfo_pop
+        rowPosition = self.tableWidget_HistoryItems.rowCount()
+        if rowPosition==0:
+            self.tableWidget_HistoryItems.insertRow(0)
+        else:
+            rowPosition=0
+            
+        for columnPosition in range(len(keys)):#(2,4):
+            key = keys[columnPosition]
+            item = QtWidgets.QTableWidgetItem(str(key))#("item {0} {1}".format(rowNumber, columnNumber))
+            item.setForeground(QtGui.QBrush(QtGui.QColor(0, 0, 0)))# set text color: default black/white?
+            item.setBackground(QtGui.QColor(self.colorsQt[columnPosition]))
+            item.setFlags( QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled  )
+            item.setCheckState(QtCore.Qt.Unchecked)
+            self.tableWidget_HistoryItems.setItem(rowPosition, columnPosition, item)
+
+        #One checkbox at the end to switch on/of to show only the models that are saved
+        columnPosition = len(keys)
+        item = QtWidgets.QTableWidgetItem("Show saved only")#("item {0} {1}".format(rowNumber, columnNumber))
+        item.setFlags( QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled  )
+        item.setCheckState(QtCore.Qt.Unchecked)
+        self.tableWidget_HistoryItems.setItem(rowPosition, columnPosition, item)
+        
+        self.tableWidget_HistoryItems.resizeColumnsToContents()
+        self.tableWidget_HistoryItems.resizeRowsToContents()
+
+
+    def history_tab_get_model_path(self):#Let user define a model he would like to convert
+        #pushButton_LoadModel
+        #Open a QFileDialog
+        filepath = QtWidgets.QFileDialog.getOpenFileName(self, 'Select a trained model you want to convert', Default_dict["Path of last model"],"Keras Model file (*.model)")
+        filepath = filepath[0]
+        if os.path.isfile(filepath):
+            self.model_2_convert = filepath
+            path, filename = os.path.split(filepath)
+            try:
+                modelindex = filename.split(".model")[0]
+                modelindex = int(modelindex.split("_")[-1])
+            except:
+                modelindex = np.nan
+                self.textBrowser_SelectedModelInfo.setText("Error loading model")
+                return
+            text = "Loaded model: "+filename+"\nModelindex: "+str(modelindex)+"\nFile is located in: "+filepath
+            self.textBrowser_SelectedModelInfo.setText(text)
+    
+    def history_tab_convertModel(self):
+        #Check if there is text in textBrowser_SelectedModelInfo
+        path = self.model_2_convert
+        try:
+            os.path.isfile(path)
+        except:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("No file defined!")
+            msg.setWindowTitle("No file defined!")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+
+        if not os.path.isfile(path):
+            #text_path = "\nFile not found!:"+path+"\nProbably the .model was deleted or not saved"
+            #self.pushButton_convertModel.setEnabled(False)
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("\nFile not found!:"+path+"\nProbably the .model was deleted or not saved")
+            msg.setWindowTitle("File not found")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+
+        #If the source format is Keras tensforflow:
+        source_format = str(self.combobox_initial_format.currentText())                        
+        target_format = str(self.comboBox_convertTo.currentText()) #What is the target format?
+
+        ##TODO: All conversion methods to multiprocessing functions!
+        def conversion_successful_msg(text):#Enable the Convert to .nnet button
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText(text)
+            msg.setWindowTitle("Successfully converted model!")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+
+
+        ##################Keras TensorFlow -> .nnet############################
+        if target_format==".nnet" and source_format=="Keras TensorFlow": 
+            ConvertToNnet = 1
+            worker = Worker(self.history_tab_convertModel_nnet_worker,ConvertToNnet)
+            def get_model_keras_from_worker(dic):
+                self.model_keras = dic["model_keras"]
+            worker.signals.history.connect(get_model_keras_from_worker)
+            def conversion_successful(i):#Enable the Convert to .nnet button
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                text = "Conversion Keras TensorFlow -> .nnet done"
+                msg.setText(text)
+                msg.setWindowTitle("Successfully converted model!")
+                msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+                msg.exec_()
+                #self.pushButton_convertModel.setEnabled(True) 
+            worker.signals.history.connect(conversion_successful)
+            self.threadpool.start(worker)
+
+        ##################Keras TensorFlow -> Frozen .pb#######################
+        elif target_format=="Frozen TensorFlow .pb" and source_format=="Keras TensorFlow":
+            #target filename should be like source +_frozen.pb
+            path_new = os.path.splitext(path)[0] + "_frozen.pb"
+            aid_dl.convert_kerastf_2_frozen_pb(path,path_new)
+            text = "Conversion Keras TensorFlow -> Frozen .pb is done"
+            conversion_successful_msg(text)
+        ##################Keras TensorFlow -> Optimized .pb####################
+        elif target_format=="Optimized TensorFlow .pb" and source_format=="Keras TensorFlow":
+            path_new = os.path.splitext(path)[0] + "_optimized.pb"
+            aid_dl.convert_kerastf_2_optimized_pb(path,path_new)
+            text = "Conversion Keras TensorFlow -> Optimized .pb is done"
+            #conversion_successful_msg(text)
+
+        ####################Frozen -> Optimized .pb############################
+        elif target_format=="Optimized TensorFlow .pb" and source_format=="Frozen TensorFlow .pb":
+            path_new = os.path.splitext(path)[0] + "_optimized.pb"
+            aid_dl.convert_frozen_2_optimized_pb(path,path_new)
+            text = "Conversion Frozen -> Optimized .pb is done"
+            #conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> ONNX####################
+        elif target_format=="ONNX (via tf2onnx)" and source_format=="Keras TensorFlow":
+            path_new = os.path.splitext(path)[0] + ".onnx"
+            aid_dl.convert_kerastf_2_onnx(path,path_new)
+            text = "Conversion Keras TensorFlow -> ONNX (via tf2onnx) is done"
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> ONNX via MMdnn####################
+        elif target_format=="ONNX (via MMdnn)" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_onnx_mmdnn(path)
+            text = "Conversion Keras TensorFlow -> ONNX (via MMdnn) is done"
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> PyTorch Script####################
+        elif target_format=="PyTorch Script"  and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"pytorch")
+            text = "Conversion Keras TensorFlow -> PyTorch Script is done. You can now use this script and the saved weights to build the model using your PyTorch installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> Caffe Script####################
+        elif target_format=="Caffe Script" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"caffe")
+            text = "Conversion Keras TensorFlow -> Caffe Script is done. You can now use this script and the saved weights to build the model using your Caffe installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> CNTK Script####################
+        elif target_format=="CNTK Script" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"cntk")
+            text = "Conversion Keras TensorFlow -> CNTK Script is done. You can now use this script and the saved weights to build the model using your CNTK installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> mxnet Script####################
+        elif target_format=="MXNet Script" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"mxnet")
+            text = "Conversion Keras TensorFlow -> MXNet Script is done. You can now use this script and the saved weights to build the model using your MXNet installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> onnx Script####################
+        elif target_format=="ONNX Script" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"onnx")
+            text = "Conversion Keras TensorFlow -> ONNX Script is done. You can now use this script and the saved weights to build the model using your ONNX installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> TensorFlow Script####################
+        elif target_format=="TensorFlow Script" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"tensorflow")
+            text = "Conversion Keras TensorFlow -> TensorFlow Script is done. You can now use this script and the saved weights to build the model using your Tensorflow installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> Keras Script####################
+        elif target_format=="Keras Script" and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_script(path,"keras")
+            text = "Conversion Keras TensorFlow -> Keras Script is done. You can now use this script and the saved weights to build the model using your Keras installation."
+            conversion_successful_msg(text)
+
+        ##################Keras TensorFlow -> CoreML####################
+        elif "CoreML" in target_format and source_format=="Keras TensorFlow":
+            aid_dl.convert_kerastf_2_coreml(path)
+            text = "Conversion Keras TensorFlow -> CoreML is done."
+            conversion_successful_msg(text)
+
+        else:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("Not implemeted (yet)")
+            msg.setWindowTitle("Not implemeted (yet)")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+                
+        #If that worked without error, save the filepath for next time
+        Default_dict["Path of last model"] = os.path.split(path)[0]
+        aid_bin.save_aid_settings(Default_dict)
+
+    def update_historyplot(self):
+        #After loading a history, there are checkboxes available. Check, if user checked some:
+        colcount = self.tableWidget_HistoryItems.columnCount()
+        #Collect items that are checked
+        selected_items = []
+        Colors = []
+        for colposition in range(colcount):  
+            #get checkbox item and; is it checked?
+            cb = self.tableWidget_HistoryItems.item(0, colposition)
+            if not cb==None:
+                if cb.checkState() == QtCore.Qt.Checked:
+                    selected_items.append(str(cb.text()))
+                    Colors.append(cb.background())
+                 
+        #Get a list of the color from the background of the table items
+        DF1 = self.loaded_history
+
+        #Clear the plot        
+        self.widget_Scatterplot.clear()
+            
+        #Add plot        
+        self.plt1 = self.widget_Scatterplot.addPlot()
+        self.plt1.showGrid(x=True,y=True)
+        self.plt1.addLegend()
+        self.plt1.setLabel('bottom', 'Epoch', units='')
+        
+        self.plot_rollmedis = [] #list for plots of rolling medians
+        
+        if "Show saved only" in selected_items:
+            #nr_of_selected_items = len(selected_items)-1
+            #get the "Saved" column from DF1
+            saved = DF1["Saved"]
+            saved = np.where(np.array(saved==1))[0]
+#        else:
+#            nr_of_selected_items = len(selected_items)
+            
+        self.Colors = Colors
+        scatter_x,scatter_y = [],[]
+        for i in range(len(selected_items)):
+            key = selected_items[i]
+            if key!="Show saved only":
+                df = DF1[key]  
+                epochs = range(len(df))
+                win = int(self.horizontalSlider_rollmedi.value())
+                rollmedi = df.rolling(window=win).median()
+                
+                if "Show saved only" in selected_items:
+                    df = np.array(df)[saved]
+                    epochs = np.array(epochs)[saved]
+                    rollmedi = pd.DataFrame(df).rolling(window=win).median()
+
+                scatter_x.append(epochs)
+                scatter_y.append(df)
+                color = self.Colors[i]
+                pen_rollmedi = list(color.color().getRgb())
+                pen_rollmedi = pg.mkColor(pen_rollmedi)
+                pen_rollmedi = pg.mkPen(color=pen_rollmedi,width=6)
+                color = list(color.color().getRgb())
+                color[-1] = int(0.6*color[-1])
+                color = tuple(color)                
+                pencolor = pg.mkColor(color)
+                brush = pg.mkBrush(color=pencolor)
+                self.plt1.plot(epochs, df,pen=None,symbol='o',symbolPen=None,symbolBrush=brush,name=key,clear=False)
+                if bool(self.checkBox_rollingMedian.isChecked()):#Should a rolling median be plotted?
+                    try:
+                        rollmedi = np.array(rollmedi).reshape(rollmedi.shape[0])
+                        rm = self.plt1.plot(np.array(epochs), rollmedi,pen=pen_rollmedi,clear=False)
+                        self.plot_rollmedis.append(rm)
+                    except Exception as e:
+                        #There is an issue for the rolling median plotting!
+                        msg = QtWidgets.QMessageBox()
+                        msg.setIcon(QtWidgets.QMessageBox.Warning)       
+                        msg.setText(str(e)+"\n->There are likely too few points to have a rolling median with such a window size ("+str(round(win))+")")
+                        msg.setWindowTitle("Error occured when plotting rolling median:")
+                        msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+                        msg.exec_()                        
+                        
+        if len(str(self.lineEdit_LoadHistory.text()))==0:
+        #if DF1==None:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("Please load History file first (.meta)")
+            msg.setWindowTitle("No History file loaded")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+            
+        if len(scatter_x)==0:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Information)       
+            msg.setText("Please select at least one of " +"\n".join(list(DF1.keys())))
+            msg.setWindowTitle("No quantity selected")
+            msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+            msg.exec_()
+            return
+
+        #Keep the information as lists available for this function
+        self.scatter_x_l, self.scatter_y_l = scatter_x,scatter_y
+        if bool(self.checkBox_linearFit.isChecked()):
+            #Put a liner region on the plot; cover the last 10% of points
+            if np.max(np.concatenate(scatter_x))<12:
+                start_x = 0
+                end_x = np.max(np.concatenate(scatter_x))+1
+            else:
+                start_x = int(0.9*np.max(np.concatenate(scatter_x)))
+                end_x = int(1.0*np.max(np.concatenate(scatter_x)))
+            self.region_linfit = pg.LinearRegionItem([start_x, end_x], bounds=[-np.inf,np.inf], movable=True)
+            self.plt1.addItem(self.region_linfit)
+
+            def region_changed():
+                try: #clear the plot from other fits if there are any
+                    if len(self.plot_fits)>0:
+                        for i in range(len(self.plot_fits)):
+                            self.plt1.legend.removeItem(self.names[i])                                
+                            self.plt1.removeItem(self.plot_fits[i])
+                except:
+                    pass
+                #where did the user drag the region_linfit to?
+                new_region = self.region_linfit.getRegion()
+                #for each curve, do a linear regression
+                self.plot_fits,self.names = [], []
+                for i in range(len(self.scatter_x_l)):
+                    scatter_x_vals = np.array(self.scatter_x_l[i])
+                    ind = np.where( (scatter_x_vals<new_region[1]) & (scatter_x_vals>new_region[0]) )
+                    scatter_x_vals = scatter_x_vals[ind]
+                    scatter_y_vals = np.array(self.scatter_y_l[i])[ind]
+                    if len(scatter_x_vals)>1:
+                        fit = np.polyfit(scatter_x_vals,scatter_y_vals,1)
+                        fit_y = fit[0]*scatter_x_vals+fit[1]    
+                        pencolor = pg.mkColor(self.Colors[i].color())
+                        pen = pg.mkPen(color=pencolor,width=6)
+                        text = 'y='+("{:.2e}".format(fit[0]))+"x + " +("{:.2e}".format(fit[1]))
+                        self.names.append(text)
+                        self.plot_fits.append(self.plt1.plot(name=text))
+                        self.plot_fits[i].setData(scatter_x_vals,fit_y,pen=pen,clear=False,name=text)
+
+            self.region_linfit.sigRegionChangeFinished.connect(region_changed)
+
+        def slider_changed():
+            if bool(self.checkBox_rollingMedian.isChecked()):
+                #remove other rolling median lines:
+                for i in range(len(self.plot_rollmedis)):
+                    self.plt1.removeItem(self.plot_rollmedis[i])
+                #Start with fresh list 
+                self.plot_rollmedis = []
+                win = int(self.horizontalSlider_rollmedi.value())
+                for i in range(len(self.scatter_x_l)):
+                    epochs = np.array(self.scatter_x_l[i])
+                    if type(self.scatter_y_l[i]) == pd.core.frame.DataFrame:
+                        rollmedi = self.scatter_y_l[i].rolling(window=win).median()
+                    else:
+                        rollmedi = pd.DataFrame(self.scatter_y_l[i]).rolling(window=win).median()
+                    rollmedi = np.array(rollmedi).reshape(rollmedi.shape[0])
+                    pencolor = pg.mkColor(self.Colors[i].color())
+                    pen_rollmedi = pg.mkPen(color=pencolor,width=6)
+                    rm = self.plt1.plot(np.array(epochs), rollmedi,pen=pen_rollmedi,clear=False)
+                    self.plot_rollmedis.append(rm)
+
+        self.horizontalSlider_rollmedi.sliderMoved.connect(slider_changed)
 
 
 
+        scatter_x = np.concatenate(scatter_x)
+        scatter_y = np.concatenate(scatter_y)
+        scatter_x_norm = (scatter_x.astype(float))/float(np.max(scatter_x))
+        scatter_y_norm = (scatter_y.astype(float))/float(np.max(scatter_y))
 
+        self.model_was_selected_before = False
+        def onClick(event):
+            #Get all plotting items
+            #if len(self.plt1.listDataItems())==nr_of_selected_items+1:
+                #delete the last item if the user selected already one:
+            if self.model_was_selected_before:
+                self.plt1.removeItem(self.plt1.listDataItems()[-1])
+
+            items = self.widget_Scatterplot.scene().items(event.scenePos())
+            #get the index of the viewbox
+            isviewbox = [type(item)==pg.graphicsItems.ViewBox.ViewBox for item in items]
+            index = np.where(np.array(isviewbox)==True)[0]
+            vb = np.array(items)[index]
+            try: #when user rescaed the vew and clicks somewhere outside, it could appear an IndexError.
+                clicked_x =  float(vb[0].mapSceneToView(event.scenePos()).x())
+                clicked_y =  float(vb[0].mapSceneToView(event.scenePos()).y())
+            except:
+                return
+            try:
+                a1 = (clicked_x)/float(np.max(scatter_x))            
+                a2 = (clicked_y)/float(np.max(scatter_y))
+            except Exception as e:
+                print(str(e))
+                return
+            #Which is the closest scatter point?
+            dist = np.sqrt(( a1-scatter_x_norm )**2 + ( a2-scatter_y_norm )**2)
+            index =  np.argmin(dist)
+            clicked_x = scatter_x[index]
+            clicked_y = scatter_y[index]
+            #Update the spinBox
+            #self.spinBox_ModelIndex.setValue(int(clicked_x))
+            #Modelindex for textBrowser_SelectedModelInfo
+            text_index = "\nModelindex: "+str(clicked_x)
+            #Indicate the selected model on the scatter plot
+            self.plt1.plot([clicked_x], [clicked_y],pen=None,symbol='o',symbolPen='w',clear=False)
+
+            #Get more information about this model
+            Modelname = str(self.loaded_para["Modelname"].iloc[0])
+            
+            path, filename = os.path.split(Modelname)
+            filename = filename.split(".model")[0]+"_"+str(clicked_x)+".model" 
+            
+            path = os.path.join(path,filename)
+            if os.path.isfile(path):
+                text_path = "\nFile is located in:"+path
+            else:
+                text_path = "\nFile not found!:"+path+"\nProbably the .model was deleted or not saved"
+            text_acc = str(DF1.iloc[clicked_x])
+            self.textBrowser_SelectedModelInfo.setText("Loaded model: "+filename+text_index+text_path+"\nPerformance:\n"+text_acc)
+            self.model_was_selected_before = True
+            self.model_2_convert = path
+        self.widget_Scatterplot.scene().sigMouseClicked.connect(onClick)
+
+    def tableWidget_HistoryItems_dclick(self,item):
+        if item is not None:
+            tableitem = self.tableWidget_HistoryItems.item(item.row(), item.column())
+            if str(tableitem.text())!="Show saved only":
+                color = QtGui.QColorDialog.getColor()
+                if color.getRgb()==(0, 0, 0, 255):#no black!
+                    return
+                else:
+                    tableitem.setBackground(color)
+                    self.update_historyplot()
+
+    def history_tab_convertModel_nnet_worker(self,ConvertToNnet,progress_callback,history_callback):
+        #Define a new session -> Necessary for threading in TensorFlow
+        with tf.compat.v1.Session() as sess:
+            sess.run(tf.compat.v1.global_variables_initializer()) 
+            path = self.model_2_convert
+            try:
+                model_keras = load_model(path,custom_objects=aid_dl.get_custom_metrics())
+            except:
+                model_keras = load_model(path)
+                
+            dic = {"model_keras":model_keras}
+            history_callback.emit(dic)
+            progress_callback.emit(1)
+    
+            if ConvertToNnet==1:
+                #Since this happened in a thread, TensorFlow cant access it anywhere else
+                #Therefore perform Conversion to nnet right away:
+                model_config = model_keras.get_config()#["layers"]
+                if type(model_config)==dict:
+                    model_config = model_config["layers"]#for keras version>2.2.3, there is a change in the output of get_config()
+                #Convert model to theano weights format (Only necesary for CNNs)
+                for layer in model_keras.layers:
+                   if "conv" in layer.__class__.__name__.lower():# in ['Convolution1D', 'Convolution2D']:
+                      original_w = K.get_value(layer.W)
+                      converted_w = aid_dl.convert_kernel(original_w)
+                      K.set_value(layer.W, converted_w)
+                
+                nnet_path, nnet_filename = os.path.split(self.model_2_convert)
+                nnet_filename = nnet_filename.split(".model")[0]+".nnet" 
+                out_path = os.path.join(nnet_path,nnet_filename)
+                
+                #the Input layer seems to be missing for newer versions of keras
+                layers = [layer.__class__.__name__ for layer in model_keras.layers]
+                if "input" not in layers[0].lower():
+                    model_config = model_config[1:]
+
+                aid_dl.dump_to_simple_cpp(model_keras=model_keras,model_config=model_config,output=out_path,verbose=False)
+                 
