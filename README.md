@@ -25,17 +25,23 @@ You can install `napari-aideveloper` via [pip]:
     pip install napari-aideveloper
 
 ## Introduction
-### 1. Load data
+* [Build](#build)
+* [History](#history)
+
+****
+
+### Build 
+#### 1. Load data
 Drag and drop your data in .rtdc (HDF5) format into the file table and set the class and training/validation.
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/00_Load_data.gif?raw=true)
 
-### 2. Choose Neural Networks
+#### 2. Choose Neural Networks
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/01_choose%20NN.gif?raw=true)
 
-### 3. Set model storage path
+#### 3. Set model storage path
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/02_save_model.gif?raw=true)
 
-### 4. Start fitting
+#### 4. Start fitting
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/03_start_fitting.gif?raw=true)
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/04_fitting.gif?raw=true)
 
@@ -44,6 +50,17 @@ Drag and drop your data in .rtdc (HDF5) format into the file table and set the c
 
 #### Image augmentation
 ![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/main/Tutorial/06_augmentation.gif?raw=true)
+
+
+### History
+#### 1. Load meta data
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/development/Tutorial/GIF/History/01_Load_metadata.gif?raw=true)
+
+#### 2. Check model details
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/development/Tutorial/GIF/History/02_model_detail.gif?raw=true)
+
+#### 3. Rolling median & Linear fit
+![alt Load_data](https://github.com/zcqwh/napari-aideveloper/blob/development/Tutorial/GIF/History/03_rolling_linear.gif?raw=true)
 
 
 
